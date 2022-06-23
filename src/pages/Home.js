@@ -9,7 +9,7 @@ export default function Home() {
       <PageHeader
         title={'Simulation'}
         extra={[
-          <Button style={{ padding: '0 8px' }} size='small' type='primary'>
+          <Button key='1' style={{ padding: '0 8px' }} size='small' type='primary'>
             Create
           </Button>
         ]}
