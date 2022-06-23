@@ -1,73 +1,38 @@
-import React from 'react';
-import AtlasSdk from '@atlas/sdk'; 
-import CobaltRoot, { Loader, Page, Header, H1, H2, Grid, Card, Avatar, Paragraph } from '@cobalt/cobalt-react-components';
+import CobaltRoot from '@cobalt/cobalt-react-components';
+import { Router } from 'react-router-dom';
 import ThemeProvider from '@cobalt/react-theme-provider'
-import { useTranslation } from "react-i18next";
-import { useCurrentUser } from './hooks'
+import ViewportProvider from '@cobalt/react-viewport-provider';
+import PortalProvider from '@cobalt/react-portal-provider';
+
+import Theme from '@cobalt/theme-experimental';
+
+import Routes from './config/routes';
+
+import { listenToAtlasPathChange, listenToUsersPathChange, history } from './config/routeAtlas';
 
 export default function App() {
-  const user = useCurrentUser()
-
   return (
     <CobaltRoot>
-      <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
-        <AppContent user={user} />
+      <ThemeProvider loader={() => Promise.resolve(Theme)}>
+        <ViewportProvider>
+          <PortalProvider>
+            <RootContainer />
+          </PortalProvider>
+        </ViewportProvider>
       </ThemeProvider>
     </CobaltRoot>
-  )
+  );
 }
 
-function AppContent({ user }) {
+listenToAtlasPathChange();
+listenToUsersPathChange();
+
+function RootContainer() {
   return (
-    <Page>
-      <AppHeader />
-      <Page.Content>
-        <Grid pushCenter fullHeight>
-          <Grid.Group>
-            <Grid.Column all='100'>
-              {!user ? <Loader /> : <Content user={user} />}
-            </Grid.Column>
-          </Grid.Group>
-        </Grid>
-      </Page.Content>
-    </Page>
-  )
-}
-
-function AppHeader() {
-  const [t] = useTranslation();
-
-  return (
-    <Header contained borderless>
-      <Header.Heading>
-        <Header.Title>
-          <H1>
-            {t('Connected to Atlas')}
-          </H1>
-        </Header.Title>
-      </Header.Heading>
-    </Header>
-  )
-}
-
-function Content({ user }) {
-  return (
-    <Card>
-      <Header borderless>
-        <Avatar primary>{getInitials(user.name)}</Avatar>
-        <Header.Heading>
-          <Header.Title>
-            <H2>{user.name}</H2>
-          </Header.Title>
-        </Header.Heading>
-      </Header>
-      <Card.Content pushContent>
-        <Paragraph>{user.email}</Paragraph>
-      </Card.Content>
-    </Card>
-  )
-}
-
-function getInitials(fullname) {
-  return fullname.split(' ').map((n) => n[0]).join('');
+    <div className="root-container">
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </div>
+  );
 }
