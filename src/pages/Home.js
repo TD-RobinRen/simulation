@@ -1,4 +1,5 @@
 import { Button, PageHeader, Table } from 'antd'
+import BarChart from './BarChart'
 
 const columns = [
   {
@@ -39,6 +40,7 @@ export default function Home() {
       />
       <div style={{ height: 40, backgroundColor: 'gray' }}></div>
       <Table columns={columns} dataSource={data} />
+      <BarChart/>
     </>
   )
 }
