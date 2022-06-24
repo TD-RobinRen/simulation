@@ -6,9 +6,12 @@ import PortalProvider from '@cobalt/react-portal-provider';
 
 import Theme from '@cobalt/theme-experimental';
 
+import { listenToAtlasPathChange, listenToUsersPathChange, history } from './config/routeAtlas';
+
 import Routes from './config/routes';
 
-import { listenToAtlasPathChange, listenToUsersPathChange, history } from './config/routeAtlas';
+listenToAtlasPathChange();
+listenToUsersPathChange();
 
 export default function App() {
   return (
@@ -23,9 +26,6 @@ export default function App() {
     </CobaltRoot>
   );
 }
-
-listenToAtlasPathChange();
-listenToUsersPathChange();
 
 function RootContainer() {
   return (
