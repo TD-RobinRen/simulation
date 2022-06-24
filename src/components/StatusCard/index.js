@@ -7,8 +7,8 @@ const { Title, Text } = Typography;
 
 export default function StatusCard({
   title = "Default size card",
-  status = "today",
-  content = "02:17",
+  status,
+  content,
   width = 300,
 }) {
   const statusIcon = (status) => {
@@ -40,12 +40,10 @@ export default function StatusCard({
     return returnVaalue;
   };
 
-  const titleComponent = !status ? (
-    title
-  ) : (
+  const titleComponent = (
     <>
-      <Title level={5}>h5. Ant Design</Title>
-      {statusIcon(status)}
+      <Title level={5}>{title}</Title>
+      {status && statusIcon(status)}
     </>
   );
 
@@ -58,15 +56,23 @@ export default function StatusCard({
         fontSize: 16,
         borderBottom: "none",
       }}
-      style={{width : { width },boxShadow:'1px 1px 2px 0 rgb(210 210 210)', margin:10}}
+      style={{
+        width: width,
+        boxShadow: "1px 1px 2px 0 rgb(210 210 210)",
+        margin: 10,
+      }}
       bodyStyle={{ textAlign: "center", marginBottom: 0, padding: 0 }}
     >
       {typeof content === "string" ? (
-        <Text strong style={{ fontSize: 60 }}>
+        <Text strong style={{ fontSize: 60, lineHeight: "227px" }}>
           {content}
         </Text>
       ) : (
-        content
+        content ?? (
+          <Text disabled style={{ fontSize: 60, lineHeight: "227px" }}>
+            Ø
+          </Text>
+        )
       )}
     </Card>
   );
