@@ -1,5 +1,4 @@
 import { Router } from 'react-router-dom';
-import ViewportProvider from '@cobalt/react-viewport-provider';
 
 import { listenToAtlasPathChange, listenToUsersPathChange, history } from './config/routeAtlas';
 import './App.less';
@@ -11,9 +10,7 @@ listenToUsersPathChange();
 
 export default function App() {
   return (
-    <ViewportProvider>
-      <RootContainer />
-    </ViewportProvider>
+    <RootContainer />
   );
 }
 
