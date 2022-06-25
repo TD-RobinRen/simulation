@@ -9,7 +9,7 @@ export default function StatusCard({
   title = "Default size card",
   status,
   content,
-  width = 300,
+  width = 200,
 }) {
   const statusIcon = (status) => {
     let returnVaalue = null;
@@ -22,7 +22,7 @@ export default function StatusCard({
           </Text>
         );
         break;
-      case "success":
+      case "live":
         returnVaalue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <Badge status="success" />
@@ -43,7 +43,7 @@ export default function StatusCard({
   const titleComponent = (
     <>
       <Title level={5}>{title}</Title>
-      {status && statusIcon(status)}
+      <div style={{ height: 15 }}>{status && statusIcon(status)}</div>
     </>
   );
 
@@ -58,18 +58,20 @@ export default function StatusCard({
       }}
       style={{
         width: width,
+        height: 200,
         boxShadow: "1px 1px 2px 0 rgb(210 210 210)",
         margin: 10,
+        paddingBottom: 16,
       }}
       bodyStyle={{ textAlign: "center", marginBottom: 0, padding: 0 }}
     >
       {typeof content === "string" ? (
-        <Text strong style={{ fontSize: 60, lineHeight: "227px" }}>
+        <Text strong style={{ fontSize: 60 }}>
           {content}
         </Text>
       ) : (
         content ?? (
-          <Text disabled style={{ fontSize: 60, lineHeight: "227px" }}>
+          <Text disabled style={{ fontSize: 60 }}>
             Ø
           </Text>
         )

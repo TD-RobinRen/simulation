@@ -1,34 +1,37 @@
-import { Button, PageHeader, Table } from 'antd'
+import { Button, PageHeader, Table } from "antd";
+import BarChart from "./BarChart";
+import Layout from "../components/Layout";
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Creator',
-    dataIndex: 'creator',
-    key: 'creator',
+    title: "Creator",
+    dataIndex: "creator",
+    key: "creator",
   },
   {
-    title: 'History',
-    dataIndex: 'history',
-    key: 'history',
-  }
+    title: "History",
+    dataIndex: "history",
+    key: "history",
+  },
 ];
 const data = [
   {
-    key: '1',
-    name: 'John Brown',
-    creator: 'Enming Hu',
+    key: "1",
+    name: "John Brown",
+    creator: "Enming Hu",
   },
 ];
 
 export default function Home() {
   return (
     <>
+      <Layout></Layout>
       <PageHeader
         title="Simulation"
         extra={[
@@ -37,8 +40,9 @@ export default function Home() {
           </Button>,
         ]}
       />
-      <div style={{ height: 40, backgroundColor: 'gray' }}></div>
+      <div style={{ height: 40, backgroundColor: "gray" }}></div>
       <Table columns={columns} dataSource={data} />
+      <BarChart />
     </>
-  )
+  );
 }
