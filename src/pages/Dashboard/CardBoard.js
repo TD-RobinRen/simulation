@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import StatusCard from "../../components/StatusCard";
 import InstrumentPanel from "../../components/InstrumentPannel";
 import StatusTable from "../../components/StatusTable";
+import BarChart from '../../components/BarChart'
 
 export default function CardBoard() {
   return (
@@ -20,7 +21,7 @@ export default function CardBoard() {
       </Col>
 
       <Col span={12}>
-        <StatusCard width={435} />
+        <StatusCard width={435} title="Service Level" content={<BarChart type={'serviceLevel'}/>}/>
       </Col>
       <Col span={6}>
         <StatusCard />
@@ -41,7 +42,7 @@ export default function CardBoard() {
         />
       </Col>
       <Col span={12}>
-        <StatusCard width={435} />
+        <StatusCard width={435} title={'Agent Occupancy'} content={<BarChart type={'agentOccupancy'}/>}/>
       </Col>
     </Row>
   );

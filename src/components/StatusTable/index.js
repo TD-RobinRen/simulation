@@ -44,7 +44,7 @@ const StatusTable = ({status, data}) => {
                 <div className="column name">{item.name}</div>
                 <div className="column group">{item.ringGroups && item.ringGroups.map(
                   el => (
-                    <div className="group-el">{el}</div>
+                    <div className="group-el" key={el}>{el}</div>
                   )
                 )}
                 </div>
