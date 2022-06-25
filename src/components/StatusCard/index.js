@@ -65,9 +65,10 @@ export default function StatusCard({
       bodyStyle={{
         textAlign: "center",
         marginBottom: 0,
-        padding: "0 10px",
+        padding: 0,
         height: 130,
         marginTop: !status && -10,
+        overflow: "auto",
       }}
     >
       {typeof content === "string" ? (

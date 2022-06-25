@@ -21,7 +21,7 @@ export default function CardBoard() {
       </Col>
 
       <Col span={12}>
-        <StatusCard width={435} title="Service Level" content={<BarChart type={'serviceLevel'}/>}/>
+        <StatusCard width={435} title="Service Level" content={<BarChart style={{width:435}} type={'serviceLevel'}/>}/>
       </Col>
       <Col span={6}>
         <StatusCard />
