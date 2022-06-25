@@ -12,10 +12,10 @@ export default function StatusCard({
   width = 200,
 }) {
   const statusIcon = (status) => {
-    let returnVaalue = null;
+    let returnValue = null;
     switch (status) {
       case "today":
-        returnVaalue = (
+        returnValue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <ClockCircleOutlined style={{ marginRight: 5 }} />
             Today
@@ -23,7 +23,7 @@ export default function StatusCard({
         );
         break;
       case "live":
-        returnVaalue = (
+        returnValue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <Badge status="success" />
             Live
@@ -31,19 +31,19 @@ export default function StatusCard({
         );
         break;
       default:
-        returnVaalue = (
+        returnValue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             {status}
           </Text>
         );
     }
-    return returnVaalue;
+    return returnValue;
   };
 
   const titleComponent = (
     <>
       <Title level={5}>{title}</Title>
-      <div style={{ height: 15 }}>{status && statusIcon(status)}</div>
+      {status && <div style={{ height: 15 }}>{statusIcon(status)}</div>}
     </>
   );
 

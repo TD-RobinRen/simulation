@@ -1,5 +1,7 @@
 import { Col, Row } from "antd";
 import StatusCard from "../../components/StatusCard";
+import InstrumentPanel from "../../components/InstrumentPannel";
+import StatusTable from "../../components/StatusTable";
 
 export default function CardBoard() {
   return (
@@ -24,11 +26,19 @@ export default function CardBoard() {
         <StatusCard />
       </Col>
       <Col span={6}>
-        <StatusCard />
+        <StatusCard
+          title="Abandon Rate"
+          status="today"
+          content={<InstrumentPanel status="start"/>}
+        />
       </Col>
 
       <Col span={12}>
-        <StatusCard width={435} />
+        <StatusCard 
+          width={435}
+          title="Agent Status"
+          content={<StatusTable status="start"/>}
+        />
       </Col>
       <Col span={12}>
         <StatusCard width={435} />
