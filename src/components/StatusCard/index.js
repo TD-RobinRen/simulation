@@ -12,10 +12,10 @@ export default function StatusCard({
   width = 200,
 }) {
   const statusIcon = (status) => {
-    let returnValue = null;
+    let returnVaalue = null;
     switch (status) {
       case "today":
-        returnValue = (
+        returnVaalue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <ClockCircleOutlined style={{ marginRight: 5 }} />
             Today
@@ -23,7 +23,7 @@ export default function StatusCard({
         );
         break;
       case "live":
-        returnValue = (
+        returnVaalue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <Badge status="success" />
             Live
@@ -31,13 +31,13 @@ export default function StatusCard({
         );
         break;
       default:
-        returnValue = (
+        returnVaalue = (
           <Text type="secondary" style={{ fontSize: 13 }}>
             {status}
           </Text>
         );
     }
-    return returnValue;
+    return returnVaalue;
   };
 
   const titleComponent = (
@@ -61,9 +61,14 @@ export default function StatusCard({
         height: 200,
         boxShadow: "1px 1px 2px 0 rgb(210 210 210)",
         margin: 10,
-        // paddingBottom: 16,
       }}
-      bodyStyle={{ textAlign: "center", marginBottom: 0, padding: 0,height: 130}}
+      bodyStyle={{
+        textAlign: "center",
+        marginBottom: 0,
+        padding: "0 10px",
+        height: 130,
+        marginTop: !status && -10,
+      }}
     >
       {typeof content === "string" ? (
         <Text strong style={{ fontSize: 60 }}>
@@ -71,7 +76,14 @@ export default function StatusCard({
         </Text>
       ) : (
         content ?? (
-          <Text disabled style={{ fontSize: 60 }}>
+          <Text
+            disabled
+            style={{
+              fontSize: 60,
+              display: "block",
+              marginTop: 20,
+            }}
+          >
             Ø
           </Text>
         )
