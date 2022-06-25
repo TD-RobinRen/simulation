@@ -1,12 +1,11 @@
-import { Router } from 'react-router-dom';
+import { listenToAtlasPathChange, listenToUsersPathChange } from './config/routeAtlas';
+import Routes from './config/routes';
+import { GlobalStore } from './hooks/use-store';
 
-import { listenToAtlasPathChange, listenToUsersPathChange, history } from './config/routeAtlas';
 import './App.less';
 
-import Routes from './config/routes';
-
-listenToAtlasPathChange();
 listenToUsersPathChange();
+listenToAtlasPathChange();
 
 export default function App() {
   return (
@@ -17,9 +16,9 @@ export default function App() {
 function RootContainer() {
   return (
     <div className="root-container">
-      <Router history={history}>
+      <GlobalStore.Provider>
         <Routes />
-      </Router>
+      </GlobalStore.Provider>
     </div>
   );
 }

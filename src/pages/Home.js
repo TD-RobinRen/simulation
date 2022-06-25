@@ -1,11 +1,13 @@
-import { Button, PageHeader, Table } from 'antd'
+import { Button, PageHeader, Table } from 'antd';
+import { Link } from 'react-router-dom';
+import { HistoryOutlined } from '@ant-design/icons';
 
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
+    render: (text) => <Link to="/dashboard">{text}</Link>,
   },
   {
     title: 'Creator',
@@ -16,6 +18,7 @@ const columns = [
     title: 'History',
     dataIndex: 'history',
     key: 'history',
+    render: () => <HistoryOutlined style={{ fontSize: 18 }} />
   }
 ];
 const data = [
