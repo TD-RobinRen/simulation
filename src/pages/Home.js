@@ -24,7 +24,7 @@ const columns = [
 const data = [
   {
     key: '1',
-    name: 'John Brown',
+    name: 'Inbound Handling Simulation',
     creator: 'Enming Hu',
   },
 ];

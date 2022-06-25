@@ -27,7 +27,7 @@ const StateMap = {
 };
 
 export default function ChartBoard() {
-  const { runState, setRunState } = GlobalStore.useContainer();
+  const { runState, setRunState, keyFrames } = GlobalStore.useContainer();
   const [isEnable, setEnable] = useState(runState === 'running');
 
   useEffect(() => {
@@ -48,7 +48,6 @@ export default function ChartBoard() {
     setRunState('pause');
   }
   const handleForward = () => {}
-  const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 
   return (
     <div>
@@ -59,7 +58,7 @@ export default function ChartBoard() {
             {StateMap[runState]?.badge}
           </Space>
           <Space align="center" size="middle">
-            <Counter runState={runState} />
+            <Counter runState={runState} startDate={keyFrames.start_date} />
             <StepBackwardOutlined disabled={!isEnable} onClick={handleBackward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
             <PauseOutlined disabled={!isEnable} onClick={handleStop} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
             <StepForwardOutlined disabled={!isEnable} onClick={handleForward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
