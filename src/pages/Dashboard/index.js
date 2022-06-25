@@ -12,6 +12,7 @@ import { GlobalStore } from "../../hooks/use-store";
 
 import FormBoard from "./FormBoard";
 import ChartBoard from "./ChartBoard";
+import CardBoard from "./CardBoard";
 
 import "./index.less";
 
@@ -57,18 +58,19 @@ export default function Dashboard() {
                 size="small"
                 disabled={!isEnable}
               >
-                {isEnable && 'Run'}
+                {isEnable && "Run"}
               </Button>
               <SettingOutlined style={{ fontSize: 16, marginLeft: 4 }} />
             </Space>
           </div>
         </Header>
         <Layout>
-          <Sider>
+          <Sider width="33.33%" style={{borderRight:'1px solid #f0f0f0'}}>
             <FormBoard />
           </Sider>
           <Content>
             <ChartBoard />
+            <CardBoard />
           </Content>
         </Layout>
       </Layout>

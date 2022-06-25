@@ -4,8 +4,8 @@ import { GlobalStore } from './hooks/use-store';
 
 import './App.less';
 
-listenToUsersPathChange();
-listenToAtlasPathChange();
+// listenToUsersPathChange();
+// listenToAtlasPathChange();
 
 export default function App() {
   return (

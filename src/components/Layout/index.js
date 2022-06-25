@@ -1,8 +1,9 @@
 import { Col, Row } from "antd";
 import StatusCard from "../StatusCard";
 import ControlBar from "../ControlBar";
-import StatusBar from "../StatusBar";
 import TopBar from "../TopBar";
+import InstrumentPanel from "../InstrumentPannel";
+import StatusTable from "../StatusTable";
 
 export default function RightLayout() {
   return (
@@ -16,12 +17,7 @@ export default function RightLayout() {
     >
       <Col span={8} style={{ borderRight: "1px solid #f0f0f0" }}></Col>
       <Col span={16} style={{ padding: 20 }}>
-        <Row justify="space-between" style={{ padding: "0 8px" }}>
-          <StatusBar />
-        </Row>
-        <Row justify="end" style={{ padding: "0 8px" }}>
-          <ControlBar />
-        </Row>
+        <ControlBar />
         <Row gutter={[16, 16]}>
           <Col span={6}>
             <StatusCard title="Service Level" status="today" content="85%" />
@@ -47,11 +43,18 @@ export default function RightLayout() {
             <StatusCard />
           </Col>
           <Col span={6}>
-            <StatusCard />
+            <StatusCard
+              title="Abandon Rate"
+              status="today"
+              content={<InstrumentPanel status="start"/>}
+              />
           </Col>
 
           <Col span={12}>
-            <StatusCard width={435} />
+            <StatusCard 
+            width={435}
+            title="Agent Status"
+            content={<StatusTable status="start"/>}/>
           </Col>
           <Col span={12}>
             <StatusCard width={435} />
