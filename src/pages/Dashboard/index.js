@@ -12,6 +12,7 @@ import { GlobalStore } from "../../hooks/use-store";
 
 import FormBoard from "./FormBoard";
 import ChartBoard from "./ChartBoard";
+import CardBoard from "./CardBoard";
 
 import "./index.less";
 
@@ -26,11 +27,11 @@ export default function Dashboard() {
 
   const [isEnable, toggleEnable] = useReducer((state) => {
     return !state;
-  }, runState === 'waiting');
+  }, runState === "waiting");
 
   useEffect(() => {
-    if (runState === 'running') toggleEnable(true)
-  }, [runState])
+    if (runState === "running") toggleEnable(true);
+  }, [runState]);
 
   return (
     <>
@@ -51,18 +52,19 @@ export default function Dashboard() {
                 size="small"
                 disabled={!isEnable}
               >
-                {isEnable && 'Run'}
+                {isEnable && "Run"}
               </Button>
               <SettingOutlined style={{ fontSize: 16, marginLeft: 4 }} />
             </Space>
           </div>
         </Header>
         <Layout>
-          <Sider>
+          <Sider width="33.33%" style={{borderRight:'1px solid #f0f0f0'}}>
             <FormBoard />
           </Sider>
           <Content>
             <ChartBoard />
+            <CardBoard />
           </Content>
         </Layout>
       </Layout>
