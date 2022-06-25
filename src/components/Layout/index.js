@@ -2,6 +2,8 @@ import { Col, Row } from "antd";
 import StatusCard from "../StatusCard";
 import ControlBar from "../ControlBar";
 import TopBar from "../TopBar";
+import InstrumentPanel from "../InstrumentPannel";
+import StatusTable from "../StatusTable";
 
 export default function RightLayout() {
   return (
@@ -41,11 +43,18 @@ export default function RightLayout() {
             <StatusCard />
           </Col>
           <Col span={6}>
-            <StatusCard />
+            <StatusCard
+              title="Abandon Rate"
+              status="today"
+              content={<InstrumentPanel status="start"/>}
+              />
           </Col>
 
           <Col span={12}>
-            <StatusCard width={435} />
+            <StatusCard 
+            width={435}
+            title="Agent Status"
+            content={<StatusTable status="start"/>}/>
           </Col>
           <Col span={12}>
             <StatusCard width={435} />

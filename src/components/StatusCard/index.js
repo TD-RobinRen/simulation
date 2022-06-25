@@ -61,9 +61,9 @@ export default function StatusCard({
         height: 200,
         boxShadow: "1px 1px 2px 0 rgb(210 210 210)",
         margin: 10,
-        paddingBottom: 16,
+        // paddingBottom: 16,
       }}
-      bodyStyle={{ textAlign: "center", marginBottom: 0, padding: 0 }}
+      bodyStyle={{ textAlign: "center", marginBottom: 0, padding: 0,height: 130}}
     >
       {typeof content === "string" ? (
         <Text strong style={{ fontSize: 60 }}>
