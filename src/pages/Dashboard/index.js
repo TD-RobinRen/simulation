@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useState } from "react";
 import { PageHeader, Button, Space, Layout } from "antd";
 import {
   SettingOutlined,
@@ -24,13 +24,19 @@ export default function Dashboard() {
     setRunState("running");
   };
 
-  const [isEnable, toggleEnable] = useReducer((state) => {
-    return !state;
-  }, runState === 'waiting');
+  const [isEnable, setEnable] = useState(runState === 'waiting');
 
   useEffect(() => {
-    if (runState === 'running') toggleEnable(true)
-  }, [runState])
+    switch(runState) {
+      case 'running':
+        setEnable(false)
+        break;
+      case 'pause':
+        setEnable(true)
+        break;
+      default:
+    }
+  }, [runState]);
 
   return (
     <>

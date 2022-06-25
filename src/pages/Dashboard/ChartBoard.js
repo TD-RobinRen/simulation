@@ -1,43 +1,52 @@
-import { useEffect, useReducer } from "react";
-import { Space, Statistic } from "antd";
+import { useEffect, useState } from "react";
+import { Space, Badge } from "antd";
 import classNames from 'classnames';
 import {
   StepBackwardOutlined,
-  ClockCircleOutlined,
-  LoadingOutlined,
   StepForwardOutlined,
   PauseOutlined,
 } from "@ant-design/icons";
 
 import { GlobalStore } from "../../hooks/use-store";
 
+import Counter from "../../components/Counter";
+
 import "./index.less";
 
-const { Countdown } = Statistic;
 
 const StateMap = {
   waiting: {
-    icon: <ClockCircleOutlined style={{ color: "#999" }} />,
-    text: <span style={{ color: "#999" }}>Waiting to start</span>,
+    badge: <Badge status="default" text="Waiting to start" />,
   },
   running: {
-    icon: <LoadingOutlined style={{ color: "green" }} />,
-    text: <span style={{ color: "green" }}>Running</span>,
+    badge: <Badge status="processing" text="Running" />,
+  },
+  pause: {
+    badge: <Badge status="error" text="Pauseing" />,
   },
 };
 
 export default function ChartBoard() {
-  const { runState } = GlobalStore.useContainer();
-  const [isEnable, toggleEnable] = useReducer((state) => {
-    return !state;
-  }, runState === 'running');
+  const { runState, setRunState } = GlobalStore.useContainer();
+  const [isEnable, setEnable] = useState(runState === 'running');
 
   useEffect(() => {
-    if (runState === 'running') toggleEnable(true)
+    switch(runState) {
+      case 'running':
+        setEnable(true)
+        break;
+      case 'pause':
+        setEnable(false)
+        break;
+      default:
+    }
   }, [runState]);
 
   const handleBackward = () => {}
-  const handleStop = () => {}
+  const handleStop = () => {
+    if (!isEnable) return;
+    setRunState('pause');
+  }
   const handleForward = () => {}
   const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 
@@ -45,16 +54,15 @@ export default function ChartBoard() {
     <div>
       <div className="chart-header">
         <h4>Result</h4>
-        <Space direction="vertical" align="center">
-          <Space align="center">
-            {StateMap[runState].icon}
-            {StateMap[runState].text}
+        <Space direction="vertical" align="end">
+          <Space>
+            {StateMap[runState]?.badge}
           </Space>
           <Space align="center" size="middle">
-            <Countdown format="HH:mm:ss:SSS" value={deadline} valueStyle={{ fontSize: 14 }} />
-            <StepBackwardOutlined onClick={handleBackward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
-            <PauseOutlined onClick={handleStop} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
-            <StepForwardOutlined onClick={handleForward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
+            <Counter runState={runState} />
+            <StepBackwardOutlined disabled={!isEnable} onClick={handleBackward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
+            <PauseOutlined disabled={!isEnable} onClick={handleStop} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
+            <StepForwardOutlined disabled={!isEnable} onClick={handleForward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
           </Space>
         </Space>
       </div>
