@@ -7,24 +7,20 @@ export const updateAppPath = ({ path, search, state }) =>
   history.push({ pathname: path.startsWith('/') ? path : `/${path}`, search, state });
 
 export const listenToAtlasPathChange = () => {
-  AtlasSdk.navigation.onContainerPathChange((containerContext) => {
-    const { pathname, search } = history.location || {};
-    if (containerContext.path) {
-      updateAppPath(containerContext);
-    } else {
-      AtlasSdk.navigation.triggerAppPathChange({
-        path: pathname,
-        search: search,
-      });
+  AtlasSdk.navigation.onContainerPathChange(({ path, search }) => {
+    const fullPath = path + search
+  
+    if (history.path !== fullPath) {
+      history.push(fullPath)
     }
-  });
+  })
 };
 
 export const listenToUsersPathChange = () => {
-  history.listen(({ pathname, search }) => {
+  history.listen(location => {
     AtlasSdk.navigation.triggerAppPathChange({
-      path: pathname,
-      search,
-    });
-  });
+      path: location.pathname,
+      search: location.search
+    })
+  })
 };
