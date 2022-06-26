@@ -1,5 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect } from "react";
+import { GlobalStore } from "../../hooks/use-store";
+
 const getOptions = (percent) => {
   const option = {
     backgroundColor: "#fff",
@@ -77,37 +79,19 @@ const getOptions = (percent) => {
 }
 
 
-const InstrumentPanel = ({status}) => {
-  let timer
-  let initStatus = true
+const InstrumentPanel = () => {
+  const { keyFrames } = GlobalStore.useContainer();
+  const { abandon_rate } = keyFrames
   useEffect(() => {
-    renderPie(0)
-  }, []);
-    useEffect(() => {
-      clearInterval(timer)
-      if (status === 'reset') {
-        initStatus = false
-      } else if(status ==='start') {
-        setInterval(()=> {
-          const percent = ((Math.random()) * 20 + 60).toFixed(0)
-          renderPie(percent)
-        }, 3000)
-      } else if(status ==='stop') {
-
-      }
-    }, [status])
+    renderPie(abandon_rate || 0)
+  }, [abandon_rate]);
     const renderPie = (percent) => {
       var chartDom = document.getElementById("myCharts");
       var myChart = echarts.init(chartDom);
       myChart.setOption(getOptions(percent));
     }
 
-    timer = setInterval(()=> {
-      const percent = ((Math.random()) * 20 + 60).toFixed(2)
-      renderPie(percent)
-    }, 3000)
-
-  return initStatus && <div id="myCharts" style={{ height: '98%', width: '98%', margin:'0 4px 4px 0'}}/>;
+  return <div id="myCharts" style={{ height: '98%', width: '98%', margin:'0 4px 4px 0'}}/>;
 };
 
 export default InstrumentPanel;
