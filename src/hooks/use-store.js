@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 
-const defaultBaseData = {
+export const defaultBaseData = {
   current_time: Date.now(),
   start_date: Date.now(),
   service_level: 10,
@@ -28,13 +28,13 @@ const Ranges = {
   agent_occupancy: [],
 };
 
-const originAgentStatus = [
-  {name: 'Peter Taylor', ringGroups:['sales', 'Billing'], id: 'abc1'},
-  {name: 'Veerle de Bree', ringGroups:['sales', 'Billing','Orders'],id: 'abc2'},
-  {name: 'Nahia Colunga', ringGroups:['Billing','Orders'],id: 'abc3'},
-  {name: 'Enming Hu', ringGroups:['Orders'],id: 'abc4'},
-  {name: 'Donald', ringGroups:['Orders'],id: 'abc5'}
-]
+// const originAgentStatus = [
+//   {name: 'Peter Taylor', ringGroups:['sales', 'Billing'], id: 'abc1'},
+//   {name: 'Veerle de Bree', ringGroups:['sales', 'Billing','Orders'],id: 'abc2'},
+//   {name: 'Nahia Colunga', ringGroups:['Billing','Orders'],id: 'abc3'},
+//   {name: 'Enming Hu', ringGroups:['Orders'],id: 'abc4'},
+//   {name: 'Donald', ringGroups:['Orders'],id: 'abc5'}
+// ]
 
 function Random(min, max) {
   return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
@@ -114,7 +114,7 @@ function useGlobalStore(
             (baseData.abandon_rate - Ranges.abandon_rate),
             baseData.abandon_rate + Ranges.abandon_rate
           ) + 1,
-          agent_status: getAgentStatus(offset, originAgentStatus, currentAgentStatus),
+          agent_status: getAgentStatus(offset, baseData.originAgentStatus, currentAgentStatus),
           agent_occupancy: baseData.agent_occupancy
         };
         setKeyFrames(data);
@@ -133,7 +133,7 @@ function useGlobalStore(
     baseData,
     setBaseData,
     offset,
-    setOffset
+    setOffset,
   };
 }
 

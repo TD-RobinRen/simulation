@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 
 import { updateAppPath } from "../../config/routeAtlas";
-import { GlobalStore } from "../../hooks/use-store";
+import { GlobalStore, defaultBaseData } from "../../hooks/use-store";
 
 import FormBoard from "./FormBoard";
 import ChartBoard from "./ChartBoard";
@@ -19,14 +19,15 @@ import "./index.less";
 const { Header, Sider, Content } = Layout;
 
 export default function Dashboard() {
-  const { runState, setRunState } = GlobalStore.useContainer();
+  const { runState, setRunState, setKeyFrames } = GlobalStore.useContainer();
 
   const handleRun = () => {
     setRunState("running");
   };
 
   const handeReset = () => {
-    
+    setRunState("waiting");
+    setKeyFrames(defaultBaseData);
   }
 
   const [isEnable, setEnable] = useState(runState === 'waiting');
