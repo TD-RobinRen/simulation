@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 
 const defaultBaseData = {
-  current_time: 0,
+  current_time: Date.now(),
   start_date: Date.now(),
   service_level: 10,
   wait_time: 0,
   longest_wait_time: 0,
   live_contacts: 0,
-  service_level_chart: [],
+  service_level_chart: [86, 78, 87, 85, 93, 92, 87, 93, 50, 70, 36, 18],
   live_contacts_queue: 0,
   abandon_rate: 0,
   agent_status: [],
-  agent_occupancy: [],
+  agent_occupancy: [86, 78, 87, 85, 93, 92, 87, 93, 49, 29, 40, 90],
 };
 
 const Ranges = {
@@ -69,7 +69,7 @@ function useGlobalStore(
             baseData.live_contacts - Ranges.live_contacts,
             baseData.live_contacts + Ranges.live_contacts
           ),
-          service_level_chart: [],
+          service_level_chart: defaultBaseData.service_level_chart,
           live_contacts_queue: Random(
             baseData.live_contacts_queue - Ranges.live_contacts_queue,
             baseData.live_contacts_queue + Ranges.live_contacts_queue
@@ -79,7 +79,7 @@ function useGlobalStore(
             baseData.abandon_rate + Ranges.abandon_rate
           ),
           agent_status: [],
-          agent_occupancy: [],
+          agent_occupancy: defaultBaseData.agent_occupancy,
         };
         setKeyFrames(data);
       }, 1000);

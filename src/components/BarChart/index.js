@@ -1,20 +1,22 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {Card} from 'antd'
 import Charts from "./Charts";
+import {GlobalStore} from "../../hooks/use-store";
 
 const TYPE_MAP = {
   serviceLevel: 'service-level',
   agentOccupancy: 'agent-occupancy'
 }
 
-const serviceData = [86,78,87,85,93,92,87,93]
-const agentData = [86,78,87,85,93,92,87,93]
+const serviceData = [86, 78, 87, 85, 93, 92, 87, 93, 50, 70, 36, 18]
+const agentData = [86, 78, 87, 85, 93, 92, 87, 93, 49, 29, 40, 90]
+
+const TIME_MAP = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
 const BarChart = ({
-  state,
-  time,
-  type
+  type = 'serviceLevel'
 }) => {
+  const { keyFrames } = GlobalStore.useContainer();
+  const currentTime = new Date(keyFrames.current_time).getHours()
   const [data, setData] = useState([])
   
   const option = useMemo(()=> ({
@@ -35,22 +37,14 @@ const BarChart = ({
     xAxis: [
       {
         type: 'category',
-        data: [
-          '8:00',
-          '9:00',
-          '10:00',
-          '11:00',
-          '12:00',
-          '13:00',
-          '14:00',
-          '15:00',
-          '16:00',
-          '17:00',
-          '18:00',
-          '19:00'
-        ],
+        data: TIME_MAP,
         axisTick: {
           alignWithLabel: true
+        },
+        axisLabel: {
+          formatter: item => {
+            return `${item}:00`
+          }
         }
       }
     ],
@@ -82,8 +76,15 @@ const BarChart = ({
   }), [type, option])
   
   useEffect(() => {
-    setData(type === 'serviceLevel' ? serviceData : agentData)
-  }, [type, state])
+    if (currentTime && (currentTime > 8 && currentTime < 19)) {
+      const index = TIME_MAP.indexOf(currentTime)
+      setData(type === 'serviceLevel' ? 
+        keyFrames.service_level_chart.splice(0, index) : 
+        keyFrames.agent_occupancy.splice(0, index))
+    } else {
+      // setData([])
+    }
+  }, [type, currentTime])
   
   return (
     <div className="bar-charts">
