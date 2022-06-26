@@ -110,9 +110,9 @@ function useGlobalStore(
             baseData.live_contacts_queue + Ranges.live_contacts_queue
           ),
           abandon_rate: Random(
-            (baseData.abandon_rate - Ranges.abandon_rate) + 1,
+            (baseData.abandon_rate - Ranges.abandon_rate),
             baseData.abandon_rate + Ranges.abandon_rate
-          ),
+          ) + 1,
           agent_status: getAgentStatus(offset, originAgentStatus, currentAgentStatus),
           agent_occupancy: baseData.agent_occupancy
         };
