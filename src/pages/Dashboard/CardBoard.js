@@ -15,9 +15,9 @@ export default function CardBoard() {
     h > 0 && (result = h.toString().padStart(2, "0") + ":" + result);
     return result;
   };
-  const { keyFrames } = GlobalStore.useContainer();
+  const { runState, keyFrames } = GlobalStore.useContainer();
 
-  return (
+  return runState === "running" || runState === "pause" ? (
     <Row gutter={[16, 16]}>
       <Col span={6}>
         <StatusCard
@@ -50,7 +50,7 @@ export default function CardBoard() {
 
       <Col span={12}>
         <StatusCard
-          width={435}
+          width={445}
           title="Service Level"
           content={<BarChart style={{ width: 435 }} type={"serviceLevel"} />}
         />
@@ -66,23 +66,55 @@ export default function CardBoard() {
         <StatusCard
           title="Abandon Rate"
           status="today"
-          content={<InstrumentPanel/>}
+          content={<InstrumentPanel />}
         />
       </Col>
 
       <Col span={12}>
         <StatusCard
-          width={435}
+          width={445}
           title="Agent Status"
-          content={<StatusTable/>}
+          content={<StatusTable />}
         />
       </Col>
       <Col span={12}>
         <StatusCard
-          width={435}
+          width={445}
           title={"Agent Occupancy"}
           content={<BarChart type={"agentOccupancy"} />}
         />
+      </Col>
+    </Row>
+  ) : (
+    <Row gutter={[16, 16]}>
+      <Col span={6}>
+        <StatusCard title="Service Level" />
+      </Col>
+      <Col span={6}>
+        <StatusCard title="Avg. Wait Time" />
+      </Col>
+      <Col span={6}>
+        <StatusCard title="Longest Wait Time" />
+      </Col>
+      <Col span={6}>
+        <StatusCard title="Live Contacts（Inbound）" />
+      </Col>
+
+      <Col span={12}>
+        <StatusCard width={445} title="Service Level" />
+      </Col>
+      <Col span={6}>
+        <StatusCard title="Live Contacts in Queue" />
+      </Col>
+      <Col span={6}>
+        <StatusCard title="Abandon Rate" />
+      </Col>
+
+      <Col span={12}>
+        <StatusCard width={445} title="Agent Status" />
+      </Col>
+      <Col span={12}>
+        <StatusCard width={445} title={"Agent Occupancy"} />
       </Col>
     </Row>
   );

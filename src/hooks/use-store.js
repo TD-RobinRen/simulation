@@ -40,7 +40,7 @@ const Ranges = {
 // ]
 
 function Random(min, max) {
-  return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
+  return Math.max(Math.round(Math.random() * (max - min)) + min, 0);
 }
 
 /**
@@ -50,7 +50,7 @@ function Random(min, max) {
  * @returns
  */
 function useGlobalStore(
-  initialState = { runState: "waiting", baseData: defaultBaseData  }
+  initialState = { runState: "waiting", baseData: defaultBaseData }
 ) {
   const [runState, setRunState] = useState(initialState.runState);
   const [baseData, setBaseData] = useState(initialState.baseData);
@@ -58,32 +58,32 @@ function useGlobalStore(
   const [offset, setOffset] = useState(1);
   console.log("🚀 ~ file: use-store.js ~ line 45 ~ keyFrames", keyFrames);
 
-  let currentAgentStatus  = [];
+  let currentAgentStatus = [];
   const getAgentStatus = (offset, originData, currentData) => {
     const array = [];
-    if(offset===1 && currentData.length){
-      currentData.forEach(agent=> {
+    if (offset === 1 && currentData.length) {
+      currentData.forEach((agent) => {
         agent.duration = agent.duration + 1;
-        array.push(agent)
-      })
-    } else if(offset===60 && currentData.length){
-      const index = Random(0, currentData.length-1)
-      currentData.forEach(agent=> {
+        array.push(agent);
+      });
+    } else if (offset === 60 && currentData.length) {
+      const index = Random(0, currentData.length - 1);
+      currentData.forEach((agent) => {
         agent.duration = agent.duration + 60;
-        array.push(agent)
-      })
-      array[index].status = Random(1,3);
-      array[index].duration = Random(1,20);
-    } else if(offset===3600 || currentData.length === 0) {
-      originData.forEach(agent=> {
-        agent.status = Random(1,3)
+        array.push(agent);
+      });
+      array[index].status = Random(1, 3);
+      array[index].duration = Random(1, 20);
+    } else if (offset === 3600 || currentData.length === 0) {
+      originData.forEach((agent) => {
+        agent.status = Random(1, 3);
         agent.duration = Random(10, 600);
-        array.push(agent)
-      })
+        array.push(agent);
+      });
     }
-    currentAgentStatus = array
-    return array
-  }
+    currentAgentStatus = array;
+    return array;
+  };
 
   useEffect(() => {
     let timer = null;
@@ -96,10 +96,7 @@ function useGlobalStore(
             baseData.service_level - Ranges.service_level,
             baseData.service_level + Ranges.service_level
           ),
-          wait_time: Random(
-            baseData.wait_time - Ranges.wait_time,
-            baseData.wait_time + Ranges.wait_time
-          ),
+          wait_time: Random(1, baseData.wait_time + Ranges.wait_time),
           longest_wait_time: Random(
             baseData.longest_wait_time - Ranges.longest_wait_time,
             baseData.longest_wait_time + Ranges.longest_wait_time
@@ -113,13 +110,23 @@ function useGlobalStore(
             baseData.live_contacts_queue - Ranges.live_contacts_queue,
             baseData.live_contacts_queue + Ranges.live_contacts_queue
           ),
-          abandon_rate: Random(
-            (baseData.abandon_rate - Ranges.abandon_rate),
-            baseData.abandon_rate + Ranges.abandon_rate
-          ) + 1,
-          agent_status: getAgentStatus(offset, baseData.originAgentStatus, currentAgentStatus),
-          agent_occupancy: baseData.agent_occupancy
+          abandon_rate:
+            Random(
+              baseData.abandon_rate - Ranges.abandon_rate,
+              baseData.abandon_rate + Ranges.abandon_rate
+            ) + 1,
+          agent_status: getAgentStatus(
+            offset,
+            baseData.originAgentStatus,
+            currentAgentStatus
+          ),
+          agent_occupancy: baseData.agent_occupancy,
         };
+        data.longest_wait_time = Math.max(
+          data.longest_wait_time,
+          defaultBaseData.longest_wait_time
+        );
+        defaultBaseData.longest_wait_time = data.longest_wait_time;
         setKeyFrames(data);
       }, 1000);
     } else {
