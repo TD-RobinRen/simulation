@@ -5,8 +5,8 @@ const defaultBaseData = {
   current_time: Date.now(),
   start_date: Date.now(),
   service_level: 10,
-  wait_time: 8,
-  longest_wait_time: 3,
+  wait_time: 0,
+  longest_wait_time: 0,
   live_contacts: 0,
   service_level_chart: [86, 78, 87, 85, 93, 92, 87, 93, 50, 70, 36, 18],
   live_contacts_queue: 0,
@@ -45,18 +45,15 @@ function useGlobalStore(
   const [keyFrames, setKeyFrames] = useState(baseData);
   const [offset, setOffset] = useState(1);
   console.log("🚀 ~ file: use-store.js ~ line 45 ~ keyFrames", keyFrames);
-  
-  const barChartsRandom = data => {
-    let arr = []
-    data.forEach(item => {
-      item = Random(
-        item - Ranges.service_level,
-        item + Ranges.service_level
-      )
-      item < 100 && arr.push(item)
-    })
-    return arr
-  }
+
+  const barChartsRandom = (data) => {
+    let arr = [];
+    data.forEach((item) => {
+      item = Random(item - Ranges.service_level, item + Ranges.service_level);
+      item < 100 && arr.push(item);
+    });
+    return arr;
+  };
 
   useEffect(() => {
     let timer = null;
@@ -69,19 +66,18 @@ function useGlobalStore(
             baseData.service_level - Ranges.service_level,
             baseData.service_level + Ranges.service_level
           ),
-          wait_time: Random(
-            baseData.wait_time - Ranges.wait_time,
-            baseData.wait_time + Ranges.wait_time
-          ),
+          wait_time: Random(1, Ranges.wait_time),
           longest_wait_time: Random(
-            baseData.longest_wait_time,
+            baseData.longest_wait_time - Ranges.longest_wait_time,
             baseData.longest_wait_time + Ranges.longest_wait_time
           ),
           live_contacts: Random(
             baseData.live_contacts - Ranges.live_contacts,
             baseData.live_contacts + Ranges.live_contacts
           ),
-          service_level_chart: barChartsRandom(defaultBaseData.service_level_chart),
+          service_level_chart: barChartsRandom(
+            defaultBaseData.service_level_chart
+          ),
           live_contacts_queue: Random(
             baseData.live_contacts_queue - Ranges.live_contacts_queue,
             baseData.live_contacts_queue + Ranges.live_contacts_queue
@@ -91,12 +87,13 @@ function useGlobalStore(
             baseData.abandon_rate + Ranges.abandon_rate
           ),
           agent_status: [],
-          agent_occupancy: barChartsRandom(defaultBaseData.agent_occupancy)
+          agent_occupancy: barChartsRandom(defaultBaseData.agent_occupancy),
         };
-        defaultBaseData.longest_wait_time =
-          data.longest_wait_time > defaultBaseData.longest_wait_time
-            ? data.longest_wait_time
-            : defaultBaseData.longest_wait_time;
+        data.longest_wait_time = Math.max(
+          data.longest_wait_time,
+          defaultBaseData.longest_wait_time
+        );
+        defaultBaseData.longest_wait_time = data.longest_wait_time;
         setKeyFrames(data);
       }, 1000);
     } else {

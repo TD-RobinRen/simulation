@@ -10,8 +10,9 @@ export default function CardBoard() {
     var h = Math.floor(result / 3600);
     var m = Math.floor((result / 60) % 60);
     var s = Math.floor(result % 60);
-    result = m + ":" + s;
-    h > 0 && (result = h + ":" + result);
+    result =
+      m.toString().padStart(2, "0") + ":" + s.toString().padStart(2, "0");
+    h > 0 && (result = h.toString().padStart(2, "0") + ":" + result);
     return result;
   };
   const { keyFrames } = GlobalStore.useContainer();
