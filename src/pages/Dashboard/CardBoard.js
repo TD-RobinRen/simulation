@@ -17,7 +17,7 @@ export default function CardBoard() {
   };
   const { runState, keyFrames } = GlobalStore.useContainer();
 
-  return runState === "running" || runState === "pause"? (
+  return runState === "running" || runState === "pause" ? (
     <Row gutter={[16, 16]}>
       <Col span={6}>
         <StatusCard
@@ -101,7 +101,7 @@ export default function CardBoard() {
       </Col>
 
       <Col span={12}>
-        <StatusCard width={445} />
+        <StatusCard width={445} title="Service Level" />
       </Col>
       <Col span={6}>
         <StatusCard title="Live Contacts in Queue" />
@@ -111,10 +111,10 @@ export default function CardBoard() {
       </Col>
 
       <Col span={12}>
-        <StatusCard width={445} />
+        <StatusCard width={445} title="Agent Status" />
       </Col>
       <Col span={12}>
-        <StatusCard width={445} />
+        <StatusCard width={445} title={"Agent Occupancy"} />
       </Col>
     </Row>
   );
