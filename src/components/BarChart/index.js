@@ -7,16 +7,14 @@ const TYPE_MAP = {
   agentOccupancy: 'agent-occupancy'
 }
 
-const serviceData = [86, 78, 87, 85, 93, 92, 87, 93, 50, 70, 36, 18]
-const agentData = [86, 78, 87, 85, 93, 92, 87, 93, 49, 29, 40, 90]
-
 const TIME_MAP = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
 const BarChart = ({
   type = 'serviceLevel'
 }) => {
   const { keyFrames } = GlobalStore.useContainer();
-  const currentTime = new Date(keyFrames.current_time).getHours()
+  const {current_time, service_level_chart, agent_occupancy} = keyFrames
+  const currentTime = new Date(current_time).getHours()
   const [data, setData] = useState([])
   
   const option = useMemo(()=> ({
@@ -55,7 +53,9 @@ const BarChart = ({
           formatter: item => {
             return `${item}%`
           }
-        }
+        },
+        min: 0,
+        max: 100
       }
     ],
     series: [
@@ -76,15 +76,15 @@ const BarChart = ({
   }), [type, option])
   
   useEffect(() => {
-    if (currentTime && (currentTime > 8 && currentTime < 19)) {
+    if (currentTime && (currentTime >= 8 && currentTime <= 19)) {
       const index = TIME_MAP.indexOf(currentTime)
-      setData(type === 'serviceLevel' ? 
-        keyFrames.service_level_chart.splice(0, index) : 
-        keyFrames.agent_occupancy.splice(0, index))
+      const dataService = service_level_chart.slice(0, index + 1)
+      const dataAgent = agent_occupancy.slice(0, index + 1)
+      setData(type === 'serviceLevel' ? dataService : dataAgent)
     } else {
-      // setData([])
+      setData([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     }
-  }, [type, currentTime, keyFrames])
+  }, [type, currentTime, service_level_chart, agent_occupancy])
   
   return (
     <div className="bar-charts">
