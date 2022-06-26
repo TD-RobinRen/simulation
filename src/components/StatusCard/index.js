@@ -66,7 +66,6 @@ export default function StatusCard({
         textAlign: "center",
         marginBottom: 0,
         padding: 0,
-        height: 130,
         marginTop: !status && -10,
         overflow: "auto",
       }}

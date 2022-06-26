@@ -28,7 +28,8 @@ const BarChart = ({
     grid: {
       top: 10,
       left: 10,
-      bottom: 10,
+      bottom: 0,
+      right: 0,
       containLabel: true
     },
     xAxis: [
@@ -75,8 +76,8 @@ const BarChart = ({
   
   const chartConfig = useMemo(()=>({
     chartId: TYPE_MAP[type],
-    width: 500,
-    height: 180,
+    width: 430,
+    height: 150,
     option: option
   }), [type, option])
   
