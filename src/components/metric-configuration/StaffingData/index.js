@@ -26,7 +26,7 @@ const StaffingData = () => {
   const [visible, setVisible] = useState(false)
   const [resultData, setResultData] = useState(originData)
   const [initData, setInitData] = useState({
-    current_time: Date.now(),
+    start_date: Date.now(),
     tableData: [],
     speed_to_answer: 0,
     talk_time: 0,
@@ -42,7 +42,7 @@ const StaffingData = () => {
     // 更新store 数据
     setBaseData({
       ...baseData,
-      current_time: resultData.current_time,
+      start_date: resultData.start_date,
       originAgentStatus: resultData.tableData
     })
   }
@@ -54,7 +54,7 @@ const StaffingData = () => {
   const handleCalendar = ({ _d }) => {
     let dayKey = new Date(_d).getDay()
     setResultData({
-      current_time: Date.parse(_d),
+      start_date: Date.parse(_d),
       tableData: MockData[dayKey],
       speed_to_answer: Random(20, 300),
       talk_time: Random(10, 239),
