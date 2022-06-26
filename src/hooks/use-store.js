@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 
-const defaultBaseData = {
+export const defaultBaseData = {
   current_time: Date.now(),
   start_date: Date.now(),
   service_level: 10,
@@ -133,7 +133,7 @@ function useGlobalStore(
     baseData,
     setBaseData,
     offset,
-    setOffset
+    setOffset,
   };
 }
 
