@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import './StatusTable.less'
 import moment from "moment";
 import { GlobalStore } from "../../hooks/use-store";
@@ -23,9 +23,9 @@ const StatusTable = ({status, data}) => {
               <div className="column duration">Duration</div>
             </div>
             <div className="body">
-              {agentData.map(item => (
-                <div className="row" key={item.id}>
-                <div className="column name">{item.name}</div>
+              {agentData.map((item, index) => (
+                <div className="row" key={index}>
+                <div className="column name">{item.agent}</div>
                 <div className="column group">{item.ringGroups && item.ringGroups.map(
                   el => (
                     <div className="group-el" key={el}>{el}</div>
