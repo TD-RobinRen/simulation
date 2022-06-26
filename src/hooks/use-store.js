@@ -45,6 +45,18 @@ function useGlobalStore(
   const [keyFrames, setKeyFrames] = useState(baseData);
   const [offset, setOffset] = useState(1);
   console.log("🚀 ~ file: use-store.js ~ line 45 ~ keyFrames", keyFrames);
+  
+  const barChartsRandom = data => {
+    let arr = []
+    data.forEach(item => {
+      item = Random(
+        item - Ranges.service_level,
+        item + Ranges.service_level
+      )
+      item < 100 && arr.push(item)
+    })
+    return arr
+  }
 
   useEffect(() => {
     let timer = null;
@@ -69,7 +81,7 @@ function useGlobalStore(
             baseData.live_contacts - Ranges.live_contacts,
             baseData.live_contacts + Ranges.live_contacts
           ),
-          service_level_chart: defaultBaseData.service_level_chart,
+          service_level_chart: barChartsRandom(defaultBaseData.service_level_chart),
           live_contacts_queue: Random(
             baseData.live_contacts_queue - Ranges.live_contacts_queue,
             baseData.live_contacts_queue + Ranges.live_contacts_queue
@@ -79,7 +91,7 @@ function useGlobalStore(
             baseData.abandon_rate + Ranges.abandon_rate
           ),
           agent_status: [],
-          agent_occupancy: defaultBaseData.agent_occupancy,
+          agent_occupancy: barChartsRandom(defaultBaseData.agent_occupancy)
         };
         setKeyFrames(data);
       }, 1000);

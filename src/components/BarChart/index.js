@@ -84,7 +84,7 @@ const BarChart = ({
     } else {
       // setData([])
     }
-  }, [type, currentTime])
+  }, [type, currentTime, keyFrames])
   
   return (
     <div className="bar-charts">
