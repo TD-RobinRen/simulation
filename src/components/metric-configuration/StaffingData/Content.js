@@ -4,7 +4,7 @@ import Staffing from './Staffing'
 import AgentProficiency from './agentProficiency'
 
 const Content = (
-  { baseData: { 
+  { originData: { 
       tableData = [],
       speed_to_answer = 0,
       talk_time=  0,

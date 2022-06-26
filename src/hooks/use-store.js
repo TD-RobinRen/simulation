@@ -13,6 +13,7 @@ const defaultBaseData = {
   abandon_rate: 0,
   agent_status: [],
   agent_occupancy: [70, 60, 43, 85, 93, 92, 56, 93, 49, 29, 40, 90],
+  originAgentStatus: []
 };
 
 const Ranges = {
@@ -129,6 +130,7 @@ function useGlobalStore(
     setRunState,
     keyFrames,
     setKeyFrames,
+    baseData,
     setBaseData,
     offset,
     setOffset

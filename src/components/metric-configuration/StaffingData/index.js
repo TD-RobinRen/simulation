@@ -5,10 +5,12 @@ import Staffing from './Staffing'
 import AgentProficiency from './agentProficiency'
 import MockData from './MockData'
 
+import { GlobalStore } from '../../../hooks/use-store'
+
 
 let weekDay = new Date().getDay()
 
-const baseData = {
+const originData = {
   tableData: MockData[weekDay],
   speed_to_answer: 212,
   talk_time: 98,
@@ -22,13 +24,27 @@ function Random(min, max) {
 const StaffingData = () => {
   const [hasData, setHasData] = useState(false)
   const [visible, setVisible] = useState(false)
-  const [resultData, setResultData] = useState(baseData)
-  const [initData, setInitData] = useState({tableData: [], speed_to_answer: 0, acw_time: 0})
+  const [resultData, setResultData] = useState(originData)
+  const [initData, setInitData] = useState({
+    current_time: Date.now(),
+    tableData: [],
+    speed_to_answer: 0,
+    talk_time: 0,
+    acw_time: 0
+  })
+
+    const { baseData, setBaseData } = GlobalStore.useContainer()
 
   const handleOk = () => {
     setVisible(false)
     setHasData(true)
     setInitData({...resultData})
+    // 更新store 数据
+    setBaseData({
+      ...baseData,
+      current_time: resultData.current_time,
+      originAgentStatus: resultData.tableData
+    })
   }
 
   const handleCancel = () => {
@@ -38,6 +54,7 @@ const StaffingData = () => {
   const handleCalendar = ({ _d }) => {
     let dayKey = new Date(_d).getDay()
     setResultData({
+      current_time: Date.parse(_d),
       tableData: MockData[dayKey],
       speed_to_answer: Random(20, 300),
       talk_time: Random(10, 239),
@@ -58,7 +75,7 @@ const StaffingData = () => {
   return (
     <div>
       {
-        hasData ? (<Content baseData={initData} openModal={ () => setVisible(true) } onSetData={ handleResetData } />) : 
+        hasData ? (<Content originData={initData} openModal={ () => setVisible(true) } onSetData={ handleResetData } />) : 
         (<div style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setVisible(!visible)} type='primary'>Import from a Data</Button>
         </div>)
