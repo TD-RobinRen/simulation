@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { createContainer } from "unstated-next";
 
 export const defaultBaseData = {
@@ -40,6 +40,25 @@ function Random(min, max) {
   return Math.max(Math.round(Math.random() * (max - min)) + min, 0);
 }
 
+const offsetReducer = (state, direction) => {
+  if (direction === 'reset') return 1;
+  // eslint-disable-next-line default-case
+  switch(state) {
+    case 1:
+      return direction === 'forward' ? 2 : 1;
+    case 2:
+      return direction === 'forward' ? 4 : 1;
+    case 4:
+      return direction === 'forward' ? 8 : 2;
+    case 8:
+      return direction === 'forward' ? 16 : 4;
+    case 16:
+      return direction === 'forward' ? 32 : 8;
+    case 32:
+      return direction === 'forward' ? 32 : 16;
+  }
+};
+
 /**
  *
  * @param {*} initialState
@@ -52,7 +71,7 @@ function useGlobalStore(
   const [runState, setRunState] = useState(initialState.runState);
   const [baseData, setBaseData] = useState(initialState.baseData);
   const [keyFrames, setKeyFrames] = useState(baseData);
-  const [offset, setOffset] = useState(1);
+  const [offset, dispatchOffset] = useReducer(offsetReducer, 1);
   console.log("🚀 ~ file: use-store.js ~ line 45 ~ keyFrames", keyFrames);
 
   let currentAgentStatus = [];
@@ -140,7 +159,7 @@ function useGlobalStore(
     baseData,
     setBaseData,
     offset,
-    setOffset,
+    dispatchOffset,
   };
 }
 
