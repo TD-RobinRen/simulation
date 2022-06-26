@@ -1,8 +1,11 @@
-import { GlobalStore } from '../../hooks/use-store';
+// import { GlobalStore } from '../../hooks/use-store';
+import MetricConfiguration from '../../components/metric-configuration';
 
 export default function FormBoard() {
-  const { runState } = GlobalStore.useContainer();
+  // const { runState } = GlobalStore.useContainer();
   return (
-    <>{runState}</>
+    <>
+      <MetricConfiguration/>
+    </>
   )
 }

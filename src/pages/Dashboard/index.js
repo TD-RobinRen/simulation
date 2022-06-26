@@ -76,7 +76,7 @@ export default function Dashboard() {
           </div>
         </Header>
         <Layout>
-          <Sider width="33.33%" style={{borderRight:'1px solid #f0f0f0'}}>
+          <Sider width="33.33%" style={{borderRight:'1px solid #f0f0f0', padding: '0 16px'}}>
             <FormBoard />
           </Sider>
           <Content>
