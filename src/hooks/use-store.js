@@ -5,8 +5,8 @@ const defaultBaseData = {
   current_time: 0,
   start_date: Date.now(),
   service_level: 10,
-  wait_time: 0,
-  longest_wait_time: 0,
+  wait_time: 8,
+  longest_wait_time: 3,
   live_contacts: 0,
   service_level_chart: [],
   live_contacts_queue: 0,
@@ -17,8 +17,8 @@ const defaultBaseData = {
 
 const Ranges = {
   service_level: 10,
-  wait_time: 60,
-  longest_wait_time: 60,
+  wait_time: 7,
+  longest_wait_time: 3,
   live_contacts: 10,
   service_level_chart: [],
   live_contacts_queue: 10,
@@ -28,7 +28,7 @@ const Ranges = {
 };
 
 function Random(min, max) {
-  return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
+  return Math.max(Math.round(Math.random() * (max - min)) + min, 0);
 }
 
 /**
@@ -38,7 +38,7 @@ function Random(min, max) {
  * @returns
  */
 function useGlobalStore(
-  initialState = { runState: "waiting", baseData: defaultBaseData  }
+  initialState = { runState: "waiting", baseData: defaultBaseData }
 ) {
   const [runState, setRunState] = useState(initialState.runState);
   const [baseData, setBaseData] = useState(initialState.baseData);
@@ -62,7 +62,7 @@ function useGlobalStore(
             baseData.wait_time + Ranges.wait_time
           ),
           longest_wait_time: Random(
-            baseData.longest_wait_time - Ranges.longest_wait_time,
+            baseData.longest_wait_time,
             baseData.longest_wait_time + Ranges.longest_wait_time
           ),
           live_contacts: Random(
@@ -81,6 +81,10 @@ function useGlobalStore(
           agent_status: [],
           agent_occupancy: [],
         };
+        defaultBaseData.longest_wait_time =
+          data.longest_wait_time > defaultBaseData.longest_wait_time
+            ? data.longest_wait_time
+            : defaultBaseData.longest_wait_time;
         setKeyFrames(data);
       }, 1000);
     } else {
@@ -96,7 +100,7 @@ function useGlobalStore(
     setKeyFrames,
     setBaseData,
     offset,
-    setOffset
+    setOffset,
   };
 }
 
