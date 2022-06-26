@@ -35,7 +35,7 @@ const Content = (
       </div>
 
       <div style={{ marginTop: '16px' }}>
-        <AgentProficiency {...agentProficiencyProps}/>
+        <AgentProficiency isEdit={true} {...agentProficiencyProps}/>
       </div>
       
     </div>
