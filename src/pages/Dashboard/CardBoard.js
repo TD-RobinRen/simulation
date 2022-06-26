@@ -66,7 +66,7 @@ export default function CardBoard() {
         <StatusCard
           title="Abandon Rate"
           status="today"
-          content={<InstrumentPanel status="start" />}
+          content={<InstrumentPanel/>}
         />
       </Col>
 
@@ -74,7 +74,7 @@ export default function CardBoard() {
         <StatusCard
           width={435}
           title="Agent Status"
-          content={<StatusTable status="start" />}
+          content={<StatusTable/>}
         />
       </Col>
       <Col span={12}>
