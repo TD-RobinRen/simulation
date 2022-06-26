@@ -16,7 +16,7 @@ const StatusTable = ({status, data}) => {
 
     data.forEach(agent=> {
       agent.status =(Math.random()*(3-1)+1).toFixed(0);
-      const randomSecond = Math.random()*(600-120) + 120;
+      const randomSecond = (Math.random()*(600-120) + 120).toFixed(0);
       agent.Duration = `00:${Math.floor(randomSecond/60)}:${(randomSecond%60)}`;
       array.push(agent)
     })

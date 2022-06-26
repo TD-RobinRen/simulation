@@ -25,6 +25,10 @@ export default function Dashboard() {
     setRunState("running");
   };
 
+  const handeReset = () => {
+    
+  }
+
   const [isEnable, setEnable] = useState(runState === 'waiting');
 
   useEffect(() => {
@@ -59,6 +63,13 @@ export default function Dashboard() {
                 disabled={!isEnable}
               >
                 {isEnable && "Run"}
+              </Button>
+              <Button
+                onClick={handeReset}
+                size="small"
+                disabled={!isEnable}
+              >
+                Reset
               </Button>
               <SettingOutlined style={{ fontSize: 16, marginLeft: 4 }} />
             </Space>

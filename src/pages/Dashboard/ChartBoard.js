@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Space, Badge } from "antd";
-import classNames from 'classnames';
+import classNames from "classnames";
 import {
   StepBackwardOutlined,
   StepForwardOutlined,
@@ -12,7 +12,6 @@ import { GlobalStore } from "../../hooks/use-store";
 import Counter from "../../components/Counter";
 
 import "./index.less";
-
 
 const StateMap = {
   waiting: {
@@ -27,41 +26,73 @@ const StateMap = {
 };
 
 export default function ChartBoard() {
-  const { runState, setRunState, keyFrames } = GlobalStore.useContainer();
-  const [isEnable, setEnable] = useState(runState === 'running');
+  const { runState, setRunState, keyFrames, offset, setOffset } =
+    GlobalStore.useContainer();
+  const [isEnable, setEnable] = useState(runState === "running");
 
   useEffect(() => {
-    switch(runState) {
-      case 'running':
-        setEnable(true)
+    switch (runState) {
+      case "running":
+        setEnable(true);
         break;
-      case 'pause':
-        setEnable(false)
+      case "pause":
+        setEnable(false);
         break;
       default:
     }
   }, [runState]);
 
-  const handleBackward = () => {}
+  const handleBackward = () => {
+    if (!isEnable || offset === 1) return;
+    setOffset((c) => c / 60);
+  };
   const handleStop = () => {
     if (!isEnable) return;
-    setRunState('pause');
-  }
-  const handleForward = () => {}
+    setRunState("pause");
+  };
+  const handleForward = () => {
+    if (!isEnable) return;
+    setOffset((c) => c * 60);
+  };
+
+  const handleChangeTime = useCallback((time) => {
+    global.currentTime = time;
+  }, []);
 
   return (
     <div>
       <div className="chart-header">
         <h4>Result</h4>
         <Space direction="vertical" align="end">
-          <Space>
-            {StateMap[runState]?.badge}
-          </Space>
+          <Space>{StateMap[runState]?.badge}</Space>
           <Space align="center" size="middle">
-            <Counter runState={runState} startDate={keyFrames.start_date} />
-            <StepBackwardOutlined disabled={!isEnable} onClick={handleBackward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
-            <PauseOutlined disabled={!isEnable} onClick={handleStop} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
-            <StepForwardOutlined disabled={!isEnable} onClick={handleForward} className={classNames('operation', { 'operation-disbaled': !isEnable })} />
+            <Counter
+              runState={runState}
+              startDate={keyFrames.start_date}
+              offset={offset}
+              onChange={handleChangeTime}
+            />
+            <StepBackwardOutlined
+              disabled={!isEnable || offset === 1}
+              onClick={handleBackward}
+              className={classNames("operation", {
+                "operation-disbaled": !isEnable || offset === 1,
+              })}
+            />
+            <PauseOutlined
+              disabled={!isEnable}
+              onClick={handleStop}
+              className={classNames("operation", {
+                "operation-disbaled": !isEnable,
+              })}
+            />
+            <StepForwardOutlined
+              disabled={!isEnable}
+              onClick={handleForward}
+              className={classNames("operation", {
+                "operation-disbaled": !isEnable,
+              })}
+            />
           </Space>
         </Space>
       </div>
