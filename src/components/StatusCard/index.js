@@ -66,11 +66,11 @@ export default function StatusCard({
         textAlign: "center",
         marginBottom: 0,
         padding: 0,
-        marginTop: !status && -10,
+        marginTop: status ? 15 : -10,
         overflow: "auto",
       }}
     >
-      {typeof content === "string" ? (
+      {typeof content === "string" || typeof content === "number" ? (
         <Text strong style={{ fontSize: 60 }}>
           {content}
         </Text>
