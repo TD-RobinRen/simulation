@@ -2,8 +2,8 @@ import { useEffect, useReducer, useState } from "react";
 import { createContainer } from "unstated-next";
 
 export const defaultBaseData = {
-  current_time: Date.now(),
-  start_date: Date.now(),
+  current_time: 0,
+  start_date: 0,
   service_level: 10,
   wait_time: 0,
   longest_wait_time: 0,
