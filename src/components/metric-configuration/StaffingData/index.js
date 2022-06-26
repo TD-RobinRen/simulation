@@ -33,7 +33,7 @@ const StaffingData = () => {
     acw_time: 0
   })
 
-    const { baseData, setBaseData } = GlobalStore.useContainer()
+  const { baseData, setBaseData } = GlobalStore.useContainer()
 
   const handleOk = () => {
     setVisible(false)
@@ -43,7 +43,10 @@ const StaffingData = () => {
     setBaseData({
       ...baseData,
       start_date: resultData.start_date,
-      originAgentStatus: resultData.tableData
+      originAgentStatus: resultData.tableData,
+      speed_to_answer: resultData.speed_to_answer,
+      talk_time: resultData.talk_time,
+      acw_time: resultData.acw_time,
     })
   }
 
@@ -52,13 +55,14 @@ const StaffingData = () => {
   }
 
   const handleCalendar = ({ _d }) => {
+    const date = `${_d.getFullYear()}-${_d.getMonth() + 1}-${_d.getDate()} 08:00:00`
     let dayKey = new Date(_d).getDay()
     setResultData({
-      start_date: Date.parse(_d),
+      start_date: Date.parse(date),
       tableData: MockData[dayKey],
-      speed_to_answer: Random(20, 300),
-      talk_time: Random(10, 239),
-      acw_time: Random(50, 654)
+      speed_to_answer: Random(1, 90),
+      talk_time: Random(1, 90),
+      acw_time: Random(1, 90)
     })
   }
 

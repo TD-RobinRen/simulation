@@ -14,6 +14,9 @@ export const defaultBaseData = {
   agent_status: [],
   agent_occupancy: [70, 60, 43, 85, 93, 92, 56, 93, 49, 29, 40, 90],
   originAgentStatus: [],
+  speed_to_answer: 0,
+  talk_time: 0,
+  acw_time: 0
 };
 
 const Ranges = {
