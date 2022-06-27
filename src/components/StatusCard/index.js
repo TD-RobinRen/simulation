@@ -9,7 +9,7 @@ export default function StatusCard({
   title = "Default size card",
   status,
   content,
-  width = 200,
+  width = 280,
 }) {
   const statusIcon = (status) => {
     let returnVaalue = null;
@@ -58,7 +58,7 @@ export default function StatusCard({
       }}
       style={{
         width: width,
-        height: 200,
+        height: 265,
         boxShadow: "1px 1px 2px 0 rgb(210 210 210)",
         margin: 10,
       }}
@@ -67,11 +67,11 @@ export default function StatusCard({
         marginBottom: 0,
         padding: 0,
         marginTop: !status && -10,
-        height: 140,
+        height: 200,
       }}
     >
       {typeof content === "string" || typeof content === "number" ? (
-        <Text strong style={{ fontSize: 60, display: "block", marginTop: 10 }}>
+        <Text strong style={{ fontSize: 60, display: "block", marginTop: 40 }}>
           {content}
         </Text>
       ) : (
@@ -81,7 +81,7 @@ export default function StatusCard({
             style={{
               fontSize: 60,
               display: "block",
-              marginTop: 20,
+              marginTop: 55,
             }}
           >
             Ø

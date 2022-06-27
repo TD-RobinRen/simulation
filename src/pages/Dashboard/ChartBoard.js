@@ -62,7 +62,7 @@ export default function ChartBoard() {
   return (
     <div>
       <div className="chart-header">
-        <h4>Result</h4>
+        <h4>Simulation Result</h4>
         <Space direction="vertical" align="end">
           <Space>{StateMap[runState]?.badge}</Space>
           <Space align="center" size="middle">

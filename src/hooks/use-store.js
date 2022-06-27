@@ -4,7 +4,7 @@ import { createContainer } from "unstated-next";
 export const defaultBaseData = {
   current_time: Date.now(),
   start_date: Date.now(),
-  service_level: 10,
+  service_level: 80,
   wait_time: 0,
   longest_wait_time: 0,
   live_contacts: 0,
@@ -19,7 +19,7 @@ export const defaultBaseData = {
 const Ranges = {
   service_level: 10,
   wait_time: 60,
-  longest_wait_time: 60,
+  longest_wait_time: 10,
   live_contacts: 10,
   service_level_chart: [],
   live_contacts_queue: 10,

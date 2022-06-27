@@ -13,7 +13,7 @@ const getOptions = (percent) => {
         fontWeight: "bold",
       },
       left: "center",
-      top: 70,
+      top: 120,
       bottom: "69%",
       itemGap: 60,
     },
@@ -75,23 +75,27 @@ const getOptions = (percent) => {
       },
     ],
   };
-  return option
-}
-
+  return option;
+};
 
 const InstrumentPanel = () => {
   const { keyFrames } = GlobalStore.useContainer();
-  const { abandon_rate } = keyFrames
+  const { abandon_rate } = keyFrames;
   useEffect(() => {
-    renderPie(abandon_rate || 0)
+    renderPie(abandon_rate || 0);
   }, [abandon_rate]);
-    const renderPie = (percent) => {
-      var chartDom = document.getElementById("myCharts");
-      var myChart = echarts.init(chartDom);
-      myChart.setOption(getOptions(percent));
-    }
+  const renderPie = (percent) => {
+    var chartDom = document.getElementById("myCharts");
+    var myChart = echarts.init(chartDom);
+    myChart.setOption(getOptions(percent));
+  };
 
-  return <div id="myCharts" style={{ height: '98%', width: '98%', margin:'0 4px 4px 0'}}/>;
+  return (
+    <div
+      id="myCharts"
+      style={{ height: "98%", width: "98%", margin: "0 4px 4px 0" }}
+    />
+  );
 };
 
 export default InstrumentPanel;
