@@ -23,10 +23,13 @@ const StateMap = {
   pause: {
     badge: <Badge status="error" text="Pauseing" />,
   },
+  finished: {
+    badge: <Badge status="success" text="Finished" />,
+  },
 };
 
 export default function ChartBoard() {
-  const { runState, setRunState, keyFrames, offset, setOffset } =
+  const { runState, setRunState, keyFrames, offset, dispatchOffset } =
     GlobalStore.useContainer();
   const [isEnable, setEnable] = useState(runState === "running");
 
@@ -44,15 +47,15 @@ export default function ChartBoard() {
 
   const handleBackward = () => {
     if (!isEnable || offset === 1) return;
-    setOffset((c) => c / 60);
+    dispatchOffset('backward');
   };
   const handleStop = () => {
     if (!isEnable) return;
     setRunState("pause");
   };
   const handleForward = () => {
-    if (!isEnable) return;
-    setOffset((c) => c * 60);
+    if (!isEnable || offset === 32) return;
+    dispatchOffset('forward');
   };
 
   const handleChangeTime = useCallback((time) => {
@@ -87,12 +90,13 @@ export default function ChartBoard() {
               })}
             />
             <StepForwardOutlined
-              disabled={!isEnable}
+              disabled={!isEnable || offset === 32}
               onClick={handleForward}
               className={classNames("operation", {
-                "operation-disbaled": !isEnable,
+                "operation-disbaled": !isEnable || offset === 32,
               })}
             />
+            <span>{`x${offset}`}</span>
           </Space>
         </Space>
       </div>

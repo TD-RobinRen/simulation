@@ -2,6 +2,8 @@ import { Button, PageHeader, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { HistoryOutlined } from '@ant-design/icons';
 
+import { updateAppPath } from '../config/routeAtlas';
+
 const columns = [
   {
     title: 'Name',
@@ -30,12 +32,15 @@ const data = [
 ];
 
 export default function Home() {
+  const handleCreate = () => {
+    updateAppPath({ path: '/dashboard' })
+  }
   return (
     <>
       <PageHeader
         title="Simulation"
         extra={[
-          <Button key="1" type="primary">
+          <Button key="1" type="primary" onClick={handleCreate}>
             Create
           </Button>,
         ]}

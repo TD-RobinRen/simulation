@@ -1,6 +1,8 @@
 import { useState, useEffect, memo } from "react";
 import dayjs from "dayjs";
 
+const BaseSecond = 30;
+
 function Counter({ runState, startDate, offset = 1, onChange = () => null }) {
   const [milliseconds, setMilliseconds] = useState(0);
 
@@ -8,7 +10,7 @@ function Counter({ runState, startDate, offset = 1, onChange = () => null }) {
     let timer = null;
     if (runState === 'running') {
       timer = setInterval(() => {
-        setMilliseconds(c => c + 1000 * offset);
+        setMilliseconds(c => c + (1000 * BaseSecond) * offset);
       }, 1000);
     }
     return () => clearInterval(timer);
@@ -18,8 +20,10 @@ function Counter({ runState, startDate, offset = 1, onChange = () => null }) {
     onChange(startDate + milliseconds);
   }, [milliseconds, onChange, startDate])
 
+  if (startDate === 0) return <span>-</span>
+
   return (
-    <span id="currentTime">
+    <span>
       {`${dayjs(startDate + milliseconds).format("YYYY-MM-DD hh:mm:ss:A")}`}
     </span>
   );
