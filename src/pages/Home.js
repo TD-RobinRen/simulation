@@ -30,6 +30,21 @@ const data = [
     name: "Inbound Handling Simulation",
     creator: "Enming Hu",
   },
+  {
+    key: "2",
+    name: "Dedicated RingGroup simulation ",
+    creator: "Stan Zhang",
+  },
+  {
+    key: "3",
+    name: "Phone drop threshold simulation ",
+    creator: "Chris Wu",
+  },
+  {
+    key: "4",
+    name: "Workload Forecasting",
+    creator: "Winnie He",
+  },
 ];
 
 export default function Home() {
