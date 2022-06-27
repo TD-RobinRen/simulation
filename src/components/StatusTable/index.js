@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import './StatusTable.less'
 import moment from "moment";
 import { GlobalStore } from "../../hooks/use-store";
+import SimulationTag from "../simulationTag";
 
 const StatusTable = ({status, data}) => {
   const { keyFrames } = GlobalStore.useContainer();
@@ -28,7 +29,8 @@ const StatusTable = ({status, data}) => {
                 <div className="column name">{item.agent}</div>
                 <div className="column group">{item.ringGroups && item.ringGroups.map(
                   el => (
-                    <div className="group-el" key={el}>{el}</div>
+                    // <div className="group-el" key={el}>{el}</div>
+                    <SimulationTag key={el} text={el}/>
                   )
                 )}
                 </div>
