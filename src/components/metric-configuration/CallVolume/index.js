@@ -56,8 +56,8 @@ const CallVolume = () => {
           <Button onClick={() => setVisible(!visible)} type='primary'>Import from a Data</Button>
         </div>)
       }
-      <Modal title="Import staffing data" visible={visible} onOk={handleOk} onCancel={handleCancel} width="800px">
-        <Row>
+      <Modal title="Import staffing data" visible={visible} onOk={handleOk} onCancel={handleCancel} width="900px">
+        <Row align='middle'>
           <Col span={10}>
             <Calendar fullscreen={false} onChange={ handleCalendar }/>
           </Col>

@@ -18,10 +18,10 @@ const TimeItem = ({ title, time, isEdit = false, onChange }) => {
   
   return (
     <Row>
-      <Col span={9}>
+      <Col span={11}>
         <span style={{ fontWeight: 'bold' }}>{ title }</span>
       </Col>
-      <Col span={15}>
+      <Col span={13}>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '16px' }}>

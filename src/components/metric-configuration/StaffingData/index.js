@@ -12,7 +12,7 @@ const firstStepData = {
   service_level: Random(78, 94),
   wait_time: Random(120, 240),
   longest_wait_time: 263,
-  live_contacts: Random(7, 33),
+  live_contacts: Random(5, 9),
   live_contacts_queue: Random(1, 28),
   abandon_rate: Random(5, 19)
 }
@@ -113,7 +113,7 @@ const StaffingData = () => {
               <div style={{ padding: '0 16px' }}>
                 <h3>Staffing</h3>
                 <div style={{ padding: '16px' }}>
-                  <div style={{ height: '300px', overflowY: 'scroll' }}>
+                  <div>
                     <Staffing sourceData={ resultData.tableData }/>
                   </div>
                   <Divider />

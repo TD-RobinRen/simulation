@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
-import { Row, Col, Tag, Divider } from 'antd'
+import { Row, Col, Divider } from 'antd'
+import SimulationTag from '../../simulationTag'
 
 
 const CallNumberTable = ({ sourceData = [], tableData = [] }) => {
@@ -35,19 +36,19 @@ const CallNumberTable = ({ sourceData = [], tableData = [] }) => {
       <Row>
         <Col span={9}></Col>
         <Col span={5}>
-          <Tag>Sales</Tag>
+          <SimulationTag text='Sales'/>
         </Col>
         <Col span={5}>
-          <Tag>Billing</Tag>
+          <SimulationTag text='Billing'/>
         </Col>
         <Col span={5}>
-          <Tag>Orders</Tag>
+          <SimulationTag text='Orders'/>
         </Col>
       </Row>
 
       <Divider style={{ margin: '8px, 0' }}/>
 
-      <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
+      <div style={{ maxHeight: '222px', overflowY: 'scroll' }}>
         {
           sourceData.map((e, i) => {
             if (i < sourceData.length - 1) {

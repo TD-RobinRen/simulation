@@ -11,7 +11,7 @@ const secondStepData = {
   service_level: Random(82, 98),
   wait_time: Random(60, 170),
   longest_wait_time: 252,
-  live_contacts: Random(5, 27),
+  live_contacts: Random(5, 9),
   live_contacts_queue: Random(0, 18),
   abandon_rate: Random(0, 11.3),
   service_level_chart: [92, 82, 91, 91, 98, 98, 91, 98, 98, 90, 92],

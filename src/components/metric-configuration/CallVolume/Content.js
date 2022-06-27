@@ -25,7 +25,7 @@ const Content = ({ sourceData, tableData, maximum_time, openModal, onReset }) =>
         <CallNumberTable sourceData={sourceData} tableData={tableData}/>
 
         <div style={{ marginTop: '16px' }}>
-          <TimeItem title='Maximum Waiting Time' time={maximum_time}/>
+          <TimeItem isEdit title='Maximum Waiting Time' time={maximum_time}/>
         </div>
       </div>
 
