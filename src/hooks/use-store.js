@@ -1,6 +1,11 @@
 import { useEffect, useReducer, useState } from "react";
 import { createContainer } from "unstated-next";
 
+import dayjs from "dayjs";
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+
+dayjs.extend(isSameOrAfter);
+
 export const defaultBaseData = {
   current_time: 0,
   start_date: 0,
@@ -188,6 +193,9 @@ function useGlobalStore(
           defaultBaseData.longest_wait_time
         );
         defaultBaseData.longest_wait_time = data.longest_wait_time;
+        if (data.current_time > new Date('1990-01-01') && dayjs(data.current_time).isSameOrAfter(dayjs(data.end_date))) {
+          setRunState("finished");
+        }
         setKeyFrames(data);
       }, 1000);
     } else {

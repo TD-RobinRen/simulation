@@ -24,6 +24,7 @@ const BarChart = ({ type = "serviceLevel" }) => {
         },
         formatter: type === "serviceLevel" ? "Level: {c}%" : "Occupancy: {c}%",
       },
+      color: type === "serviceLevel" ? ["#5A6ACF"] : ["#6C84B4"],
       grid: {
         top: 20,
         left: 20,

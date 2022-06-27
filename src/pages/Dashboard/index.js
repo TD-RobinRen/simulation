@@ -31,6 +31,7 @@ export default function Dashboard() {
     setRunState("waiting");
     setKeyFrames(defaultBaseData);
     dispatchOffset('reset');
+    global.currentTime = 0;
   }
 
   const handeSave = () => {}
