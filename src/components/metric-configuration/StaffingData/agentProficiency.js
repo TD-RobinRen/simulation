@@ -29,9 +29,15 @@ const AgentProficiency = ({ speed_to_answer = 0, talk_time = 0, acw_time = 0, is
 
   return (
     <>
-      <TimeItem onChange={updateSpeedToAnswer} isEdit={isEdit} title='Speed to answer' time={speed_to_answer}/>
-      <TimeItem onChange={updateTalkTime} isEdit={isEdit} title='Talk Time' time={talk_time}/>
-      <TimeItem onChange={updateAcwTime} isEdit={isEdit} title='ACW Time' time={acw_time}/>
+      <div style={{ marginBottom: '8px' }}>
+        <TimeItem onChange={updateSpeedToAnswer} isEdit={isEdit} title='Speed to answer' time={speed_to_answer}/>
+      </div>
+      <div style={{ marginBottom: '8px' }}>
+        <TimeItem onChange={updateTalkTime} isEdit={isEdit} title='Talk Time' time={talk_time}/>
+      </div>
+      <div>
+        <TimeItem onChange={updateAcwTime} isEdit={isEdit} title='ACW Time' time={acw_time}/>
+      </div>
     </>
   )
 }

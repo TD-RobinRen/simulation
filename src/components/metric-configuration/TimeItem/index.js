@@ -23,26 +23,30 @@ const TimeItem = ({ title, time, isEdit = false, onChange }) => {
       </Col>
       <Col span={15}>
         <div>
-          <Row justify='space-between'>
+          <Row justify='end'>
             <Col span={12}>
-              <Row justify='end'>
-                <Col span={23}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div>
                   {
-                  isEdit ? <InputNumber value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
+                    isEdit ? <InputNumber value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
                   }
-                </Col>
-                <Col span={1}><span>m</span></Col>
-              </Row>
+                </div>
+                <div style={{ marginLeft: '8px' }}>
+                  <span>m</span>
+                </div>
+              </div>
             </Col>
             <Col span={12}>
-              <Row justify='end'>
-                <Col span={23}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <div>
                   {
                     isEdit ? <InputNumber value={second} min={0} max={59} onChange={ handleSecond }/> : <span>{s}</span>
                   }
-                </Col>
-                <Col span={1}><span>s</span></Col>
-              </Row>
+                </div>
+                <div style={{ marginLeft: '8px' }}>
+                  <span>s</span>
+                </div>
+              </div>
             </Col>
           </Row>
         </div>

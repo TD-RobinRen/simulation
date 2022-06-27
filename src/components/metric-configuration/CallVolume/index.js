@@ -12,9 +12,9 @@ function Random(min, max) {
 function generateRandomListNum() {
   const arr = TIME_PERIOD.map(e => {
     return {
-      sales: Random(1, 200),
-      billing: Random(1, 200),
-      orders: Random(1, 200)
+      sales: Random(0, 35),
+      billing: Random(0, 35),
+      orders: Random(0, 35)
     }
   })
   return arr
@@ -23,7 +23,7 @@ function generateRandomListNum() {
 const CallVolume = () => {
   const [hasData, setHasData] = useState(false)
   const [visible, setVisible] = useState(false)
-  const [originData, setOriginData] = useState({ tableData: generateRandomListNum(), maximum_time: 0 })
+  const [originData, setOriginData] = useState({ tableData: generateRandomListNum(), maximum_time: Random(240, 600) })
   const [initData, setInitData] = useState({ tableData: [], maximum_time: 0 })
 
   const handleOk = () => {
@@ -39,7 +39,7 @@ const CallVolume = () => {
   const handleCalendar = () => {
     setOriginData({
       tableData: generateRandomListNum(),
-      maximum_time: Random(1, 1000)
+      maximum_time: Random(240, 600)
     })
   }
 
@@ -63,6 +63,7 @@ const CallVolume = () => {
           </Col>
           <Col span={14}>
             <div style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.06)', height: '100%', padding: '8px' }}>
+              <h3>Call Volume</h3>
               <CallNumberTable sourceData={TIME_PERIOD} tableData={ originData.tableData } />
               <div style={{ marginTop: '16px' }}>
                 <TimeItem title='Maximum Waiting Time' time={originData.maximum_time}/>

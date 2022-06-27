@@ -10,7 +10,10 @@ import { GlobalStore } from '../../../hooks/use-store'
 
 let weekDay = new Date().getDay()
 
+const toDayDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 08:00:00`
+
 const originData = {
+  start_date: Date.parse(toDayDate),
   tableData: MockData[weekDay],
   speed_to_answer: 212,
   talk_time: 98,
@@ -60,9 +63,9 @@ const StaffingData = () => {
     setResultData({
       start_date: Date.parse(date),
       tableData: MockData[dayKey],
-      speed_to_answer: Random(1, 90),
-      talk_time: Random(1, 90),
-      acw_time: Random(1, 90)
+      speed_to_answer: Random(18, 43),
+      talk_time: Random(140, 430),
+      acw_time: Random(120, 270)
     })
   }
 
