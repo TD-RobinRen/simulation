@@ -87,7 +87,7 @@ export default function CardBoard() {
               width={605}
               title="Service Level"
               content={
-                <BarChart style={{ marginTop: 30 }} type={"serviceLevel"} />
+                <BarChart type={"serviceLevel"} />
               }
             />
           </Col>
@@ -102,7 +102,7 @@ export default function CardBoard() {
             <StatusCard
               title="Abandon Rate"
               status="today"
-              content={<InstrumentPanel style={{ marginTop: 20 }} />}
+              content={<InstrumentPanel />}
             />
           </Col>
 

@@ -80,7 +80,7 @@ export default function Dashboard() {
           <Sider width="33.33%" style={{borderRight:'1px solid #f0f0f0', padding: '0 16px'}}>
             <FormBoard />
           </Sider>
-          <Content>
+          <Content style={{margin:'0 15px'}}>
             <ChartBoard />
             <CardBoard />
           </Content>
