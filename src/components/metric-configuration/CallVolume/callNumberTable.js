@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Row, Col, Tag, Divider } from 'antd'
 
 
 const CallNumberTable = ({ sourceData = [], tableData = [] }) => {
+
+  const totalCallNumbers = useMemo(() => {
+    if (tableData.length) {
+      const total = tableData.reduce((a, b) => {
+        return a + (b.sales + b.billing + b.orders)
+      }, 0)
+      return total
+    } else {
+      return 0
+    }
+
+  }, [tableData])
+
   return (
     <>
+
+      <div style={{ marginBottom: '8px' }}>
+        <Row>
+          <Col span={12}>
+            <div style={{ fontWeight: 'bold' }}>Total Number of Calls</div>
+          </Col>
+          <Col span={12}>
+            <div style={{ textAlign: 'right', fontWeight: 'bold' }}>
+              <span>{totalCallNumbers}</span>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      
       <Row>
         <Col span={9}></Col>
         <Col span={5}>
