@@ -19,36 +19,33 @@ const TimeItem = ({ title, time, isEdit = false, onChange }) => {
   return (
     <Row>
       <Col span={9}>
-        <span>{ title }</span>
+        <span style={{ fontWeight: 'bold' }}>{ title }</span>
       </Col>
       <Col span={15}>
-        <div>
-          <Row justify='end'>
-            <Col span={12}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                <div>
-                  {
-                    isEdit ? <InputNumber value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
-                  }
-                </div>
-                <div style={{ marginLeft: '8px' }}>
-                  <span>m</span>
-                </div>
-              </div>
-            </Col>
-            <Col span={12}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                <div>
-                  {
-                    isEdit ? <InputNumber value={second} min={0} max={59} onChange={ handleSecond }/> : <span>{s}</span>
-                  }
-                </div>
-                <div style={{ marginLeft: '8px' }}>
-                  <span>s</span>
-                </div>
-              </div>
-            </Col>
-          </Row>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '16px' }}>
+            <div>
+              {
+                isEdit ? <InputNumber value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
+              }
+            </div>
+            <div style={{ marginLeft: '8px' }}>
+              <span>m</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <div>
+              {
+                isEdit ? <InputNumber value={second} min={0} max={59} onChange={ handleSecond }/> : <span>{s}</span>
+              }
+            </div>
+            <div style={{ marginLeft: '8px' }}>
+              <span>s</span>
+            </div>
+          </div>
+
         </div>
       </Col>
     </Row>

@@ -8,6 +8,16 @@ import MockData from './MockData'
 import { GlobalStore } from '../../../hooks/use-store'
 
 
+const firstStepData = {
+  service_level: Random(78, 94),
+  wait_time: Random(120, 240),
+  longest_wait_time: 263,
+  live_contacts: Random(7, 33),
+  live_contacts_queue: Random(1, 28),
+  abandon_rate: Random(5, 19)
+}
+
+
 let weekDay = new Date().getDay()
 
 const toDayDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 08:00:00`
@@ -52,6 +62,7 @@ const StaffingData = () => {
       speed_to_answer: resultData.speed_to_answer,
       talk_time: resultData.talk_time,
       acw_time: resultData.acw_time,
+      ...firstStepData
     })
   }
 
