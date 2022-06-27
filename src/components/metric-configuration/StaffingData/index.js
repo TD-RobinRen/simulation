@@ -11,9 +11,10 @@ import { GlobalStore } from '../../../hooks/use-store'
 let weekDay = new Date().getDay()
 
 const toDayDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 08:00:00`
-
+const endDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 19:00:00`
 const originData = {
   start_date: Date.parse(toDayDate),
+  end_date: Date.parse(endDate),
   tableData: MockData[weekDay],
   speed_to_answer: 212,
   talk_time: 98,
@@ -46,6 +47,7 @@ const StaffingData = () => {
     setBaseData({
       ...baseData,
       start_date: resultData.start_date,
+      end_date: resultData.end_date,
       originAgentStatus: resultData.tableData,
       speed_to_answer: resultData.speed_to_answer,
       talk_time: resultData.talk_time,
@@ -58,10 +60,13 @@ const StaffingData = () => {
   }
 
   const handleCalendar = ({ _d }) => {
-    const date = `${_d.getFullYear()}-${_d.getMonth() + 1}-${_d.getDate()} 08:00:00`
+    const startDate = `${_d.getFullYear()}-${_d.getMonth() + 1}-${_d.getDate()} 08:00:00`
+    const endDate = `${_d.getFullYear()}-${_d.getMonth() + 1}-${_d.getDate()} 19:00:00`
+
     let dayKey = new Date(_d).getDay()
     setResultData({
-      start_date: Date.parse(date),
+      start_date: Date.parse(startDate),
+      end_date: Date.parse(endDate),
       tableData: MockData[dayKey],
       speed_to_answer: Random(18, 43),
       talk_time: Random(140, 430),
