@@ -1,40 +1,41 @@
-import { Button, PageHeader, Table } from 'antd';
-import { Link } from 'react-router-dom';
-import { HistoryOutlined } from '@ant-design/icons';
-
-import { updateAppPath } from '../config/routeAtlas';
+import { Button, PageHeader, Table } from "antd";
+import { Link } from "react-router-dom";
+import { HistoryOutlined } from "@ant-design/icons";
+import { Image } from "antd";
+import SearchBar from "./search-bar.png";
+import { updateAppPath } from "../config/routeAtlas";
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
     render: (text) => <Link to="/dashboard">{text}</Link>,
   },
   {
-    title: 'Creator',
-    dataIndex: 'creator',
-    key: 'creator',
+    title: "Creator",
+    dataIndex: "creator",
+    key: "creator",
   },
   {
-    title: 'History',
-    dataIndex: 'history',
-    key: 'history',
-    render: () => <HistoryOutlined style={{ fontSize: 18 }} />
-  }
+    title: "History",
+    dataIndex: "history",
+    key: "history",
+    render: () => <HistoryOutlined style={{ fontSize: 18 }} />,
+  },
 ];
 const data = [
   {
-    key: '1',
-    name: 'Inbound Handling Simulation',
-    creator: 'Enming Hu',
+    key: "1",
+    name: "Inbound Handling Simulation",
+    creator: "Enming Hu",
   },
 ];
 
 export default function Home() {
   const handleCreate = () => {
-    updateAppPath({ path: '/dashboard' })
-  }
+    updateAppPath({ path: "/dashboard" });
+  };
   return (
     <>
       <PageHeader
@@ -45,8 +46,8 @@ export default function Home() {
           </Button>,
         ]}
       />
-      <div style={{ height: 40, backgroundColor: 'gray' }}></div>
+      <Image src={SearchBar} preview={false} />
       <Table columns={columns} dataSource={data} />
     </>
-  )
+  );
 }
