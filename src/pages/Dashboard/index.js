@@ -5,6 +5,8 @@ import {
   PlayCircleOutlined,
   LeftOutlined,
   LoadingOutlined,
+  SaveOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 
 import { updateAppPath } from "../../config/routeAtlas";
@@ -31,6 +33,8 @@ export default function Dashboard() {
     dispatchOffset('reset');
   }
 
+  const handeSave = () => {}
+
   const [isEnable, setEnable] = useState(runState === 'waiting');
 
   useEffect(() => {
@@ -40,6 +44,9 @@ export default function Dashboard() {
         break;
       case 'pause':
         setEnable(true)
+        break;
+      case "finished":
+        setEnable(true);
         break;
       default:
     }
@@ -64,14 +71,25 @@ export default function Dashboard() {
                 size="small"
                 disabled={!isEnable}
               >
-                {isEnable && "Run"}
+                {isEnable ? "Run" : "Running"}
               </Button>
               <Button
+                icon={<ReloadOutlined />}
                 onClick={handeReset}
                 size="small"
                 disabled={!isEnable}
               >
                 Reset
+              </Button>
+              <Button
+                icon={<SaveOutlined />}
+                type="primary"
+                onClick={handeSave}
+                size="small"
+                disabled={!isEnable}
+                ghost
+              >
+                Save
               </Button>
               <SettingOutlined style={{ fontSize: 16, marginLeft: 4 }} />
             </Space>

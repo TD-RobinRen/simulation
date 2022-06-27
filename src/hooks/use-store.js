@@ -152,6 +152,7 @@ function useGlobalStore(
         const data = {
           current_time: global.currentTime || baseData.start_date,
           start_date: baseData.start_date,
+          end_date: baseData.end_date,
           service_level: Random(
             baseData.service_level - Ranges.service_level,
             baseData.service_level + Ranges.service_level

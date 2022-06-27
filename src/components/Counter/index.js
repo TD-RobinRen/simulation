@@ -20,8 +20,6 @@ function Counter({ runState, startDate, offset = 1, onChange = () => null }) {
     onChange(startDate + milliseconds);
   }, [milliseconds, onChange, startDate])
 
-  if (startDate === 0) return <span>-</span>
-
   return (
     <span>
       {`${dayjs(startDate + milliseconds).format("YYYY-MM-DD hh:mm:ss:A")}`}
