@@ -35,7 +35,7 @@ export default function CardBoard() {
           </Col>
 
           <Col span={12}>
-            <StatusCard width={605} title="Service Level" />
+            <StatusCard width={595} title="Service Level" />
           </Col>
           <Col span={6}>
             <StatusCard title="Live Contacts in Queue" />
@@ -45,10 +45,10 @@ export default function CardBoard() {
           </Col>
 
           <Col span={12}>
-            <StatusCard width={605} title="Agent Status" />
+            <StatusCard width={595} title="Agent Status" />
           </Col>
           <Col span={12}>
-            <StatusCard width={605} title={"Agent Occupancy"} />
+            <StatusCard width={595} title={"Agent Occupancy"} />
           </Col>
         </>
       ) : (
@@ -84,7 +84,7 @@ export default function CardBoard() {
 
           <Col span={12}>
             <StatusCard
-              width={605}
+              width={595}
               title="Service Level"
               content={
                 <BarChart type={"serviceLevel"} />
@@ -108,14 +108,14 @@ export default function CardBoard() {
 
           <Col span={12}>
             <StatusCard
-              width={605}
+              width={595}
               title="Agent Status"
               content={<StatusTable />}
             />
           </Col>
           <Col span={12}>
             <StatusCard
-              width={605}
+              width={595}
               title={"Agent Occupancy"}
               content={<BarChart type={"agentOccupancy"} />}
             />

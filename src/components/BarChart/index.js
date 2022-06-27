@@ -7,7 +7,7 @@ const TYPE_MAP = {
   agentOccupancy: "agent-occupancy",
 };
 
-const TIME_MAP = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+const TIME_MAP = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 const BarChart = ({ type = "serviceLevel" }) => {
   const { keyFrames } = GlobalStore.useContainer();
@@ -80,13 +80,13 @@ const BarChart = ({ type = "serviceLevel" }) => {
   );
 
   useEffect(() => {
-    if (currentTime && currentTime >= 8 && currentTime <= 19) {
+    if (currentTime && currentTime >= 9 && currentTime <= 19) {
       const index = TIME_MAP.indexOf(currentTime);
       const dataService = service_level_chart.slice(0, index + 1);
       const dataAgent = agent_occupancy.slice(0, index + 1);
       setData(type === "serviceLevel" ? dataService : dataAgent);
     } else {
-      setData([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      setData([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     }
   }, [type, currentTime, service_level_chart, agent_occupancy]);
 

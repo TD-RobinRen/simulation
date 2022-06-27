@@ -6,12 +6,16 @@ import {
   StepForwardOutlined,
   PauseOutlined,
 } from "@ant-design/icons";
+import dayjs from "dayjs";
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 
 import { GlobalStore } from "../../hooks/use-store";
 
 import Counter from "../../components/Counter";
 
 import "./index.less";
+
+dayjs.extend(isSameOrAfter);
 
 const StateMap = {
   waiting: {
@@ -41,6 +45,9 @@ export default function ChartBoard() {
       case "pause":
         setEnable(false);
         break;
+      case "finished":
+        setEnable(false);
+        break;
       default:
     }
   }, [runState]);
@@ -60,7 +67,10 @@ export default function ChartBoard() {
 
   const handleChangeTime = useCallback((time) => {
     global.currentTime = time;
-  }, []);
+    if (time > new Date('1990-01-01') && dayjs(time).isSameOrAfter(dayjs(keyFrames.end_date))) {
+      setRunState("finished");
+    }
+  }, [keyFrames.end_date, setRunState]);
 
   return (
     <div>
@@ -69,12 +79,14 @@ export default function ChartBoard() {
         <Space direction="vertical" align="end">
           <Space>{StateMap[runState]?.badge}</Space>
           <Space align="center" size="middle">
-            <Counter
-              runState={runState}
-              startDate={keyFrames.start_date}
-              offset={offset}
-              onChange={handleChangeTime}
-            />
+            {keyFrames.start_date === 0 ? '-' : (
+               <Counter
+                runState={runState}
+                startDate={keyFrames.start_date}
+                offset={offset}
+                onChange={handleChangeTime}
+              />
+            )}
             <StepBackwardOutlined
               disabled={!isEnable || offset === 1}
               onClick={handleBackward}
