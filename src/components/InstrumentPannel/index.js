@@ -9,11 +9,11 @@ const getOptions = (percent) => {
       text: `${percent}%`,
       textStyle: {
         color: "#000",
-        fontSize: 26,
+        fontSize: 52,
         fontWeight: "bold",
       },
       left: "center",
-      top: 120,
+      top: 95,
       bottom: "69%",
       itemGap: 60,
     },
@@ -51,7 +51,7 @@ const getOptions = (percent) => {
             value: percent,
             itemStyle: {
               normal: {
-                color: "rgba(80,150,224,1)",
+                color: "rgba(14,40,232,0.85)",
               },
             },
           },
