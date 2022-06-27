@@ -6,16 +6,12 @@ import {
   StepForwardOutlined,
   PauseOutlined,
 } from "@ant-design/icons";
-import dayjs from "dayjs";
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 
 import { GlobalStore } from "../../hooks/use-store";
 
 import Counter from "../../components/Counter";
 
 import "./index.less";
-
-dayjs.extend(isSameOrAfter);
 
 const StateMap = {
   waiting: {
@@ -67,10 +63,7 @@ export default function ChartBoard() {
 
   const handleChangeTime = useCallback((time) => {
     global.currentTime = time;
-    if (time > new Date('1990-01-01') && dayjs(time).isSameOrAfter(dayjs(keyFrames.end_date))) {
-      setRunState("finished");
-    }
-  }, [keyFrames.end_date, setRunState]);
+  }, []);
 
   return (
     <div>
