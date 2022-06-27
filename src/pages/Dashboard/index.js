@@ -19,7 +19,7 @@ import "./index.less";
 const { Header, Sider, Content } = Layout;
 
 export default function Dashboard() {
-  const { runState, setRunState, setKeyFrames } = GlobalStore.useContainer();
+  const { runState, setRunState, setKeyFrames, dispatchOffset } = GlobalStore.useContainer();
 
   const handleRun = () => {
     setRunState("running");
@@ -28,6 +28,7 @@ export default function Dashboard() {
   const handeReset = () => {
     setRunState("waiting");
     setKeyFrames(defaultBaseData);
+    dispatchOffset('reset');
   }
 
   const [isEnable, setEnable] = useState(runState === 'waiting');

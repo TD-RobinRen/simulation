@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { createContainer } from "unstated-next";
 
 export const defaultBaseData = {
-  current_time: Date.now(),
-  start_date: Date.now(),
+  current_time: 0,
+  start_date: 0,
   service_level: 10,
   wait_time: 0,
   longest_wait_time: 0,
   live_contacts: 0,
-  service_level_chart: [86, 78, 87, 85, 93, 92, 87, 93, 50, 70, 36, 18],
+  service_level_chart: [86, 78, 87, 85, 93, 92, 87, 93, 94, 84, 87, 79],
   live_contacts_queue: 0,
   abandon_rate: 0,
   agent_status: [],
-  agent_occupancy: [70, 60, 43, 85, 93, 92, 56, 93, 49, 29, 40, 90],
+  agent_occupancy: [94, 98, 99, 92, 91, 93, 94, 100, 91, 94, 98, 98],
   originAgentStatus: [],
   speed_to_answer: 0,
   talk_time: 0,
@@ -43,6 +43,25 @@ function Random(min, max) {
   return Math.max(Math.round(Math.random() * (max - min)) + min, 0);
 }
 
+const offsetReducer = (state, direction) => {
+  if (direction === 'reset') return 1;
+  // eslint-disable-next-line default-case
+  switch(state) {
+    case 1:
+      return direction === 'forward' ? 2 : 1;
+    case 2:
+      return direction === 'forward' ? 4 : 1;
+    case 4:
+      return direction === 'forward' ? 8 : 2;
+    case 8:
+      return direction === 'forward' ? 16 : 4;
+    case 16:
+      return direction === 'forward' ? 32 : 8;
+    case 32:
+      return direction === 'forward' ? 32 : 16;
+  }
+};
+
 /**
  *
  * @param {*} initialState
@@ -55,7 +74,7 @@ function useGlobalStore(
   const [runState, setRunState] = useState(initialState.runState);
   const [baseData, setBaseData] = useState(initialState.baseData);
   const [keyFrames, setKeyFrames] = useState(baseData);
-  const [offset, setOffset] = useState(1);
+  const [offset, dispatchOffset] = useReducer(offsetReducer, 1);
   console.log("🚀 ~ file: use-store.js ~ line 45 ~ keyFrames", keyFrames);
 
   let currentAgentStatus = [];
@@ -143,7 +162,7 @@ function useGlobalStore(
     baseData,
     setBaseData,
     offset,
-    setOffset,
+    dispatchOffset,
   };
 }
 
