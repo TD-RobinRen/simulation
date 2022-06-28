@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 import { createContainer } from "unstated-next";
 
 import dayjs from "dayjs";
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
 dayjs.extend(isSameOrAfter);
 
@@ -22,42 +22,41 @@ export const defaultBaseData = {
   originAgentStatus: [],
   speed_to_answer: 0,
   talk_time: 0,
-  acw_time: 0
+  acw_time: 0,
 };
 
 const Ranges = {
   service_level: 10,
   wait_time: 60,
   longest_wait_time: 10,
-  live_contacts: 10,
+  live_contacts: 3,
   service_level_chart: [],
   live_contacts_queue: 10,
-  abandon_rate: 15,
+  abandon_rate: 10,
   agent_status: [],
   agent_occupancy: [],
 };
-
 
 function Random(min, max) {
   return Math.max(Math.round(Math.random() * (max - min)) + min, 0);
 }
 
 const offsetReducer = (state, direction) => {
-  if (direction === 'reset') return 1;
+  if (direction === "reset") return 1;
   // eslint-disable-next-line default-case
-  switch(state) {
+  switch (state) {
     case 1:
-      return direction === 'forward' ? 2 : 1;
+      return direction === "forward" ? 2 : 1;
     case 2:
-      return direction === 'forward' ? 4 : 1;
+      return direction === "forward" ? 4 : 1;
     case 4:
-      return direction === 'forward' ? 8 : 2;
+      return direction === "forward" ? 8 : 2;
     case 8:
-      return direction === 'forward' ? 16 : 4;
+      return direction === "forward" ? 16 : 4;
     case 16:
-      return direction === 'forward' ? 32 : 8;
+      return direction === "forward" ? 32 : 8;
     case 32:
-      return direction === 'forward' ? 32 : 16;
+      return direction === "forward" ? 32 : 16;
   }
 };
 
@@ -86,10 +85,10 @@ function useGlobalStore(
         agent.duration = Random(10, 600);
         array.push(agent);
       });
-    }else {
+    } else {
       switch (offset) {
         case 1:
-          const index1 = Random(0, currentData.length - 1);      
+          const index1 = Random(0, currentData.length - 1);
           currentData.forEach((agent) => {
             agent.duration = agent.duration + 30;
             array.push(agent);
@@ -97,14 +96,14 @@ function useGlobalStore(
           array[index1].status = Random(1, 3);
           array[index1].duration = Random(1, 20);
           break;
-        case 2: 
+        case 2:
         case 4:
         case 6:
         case 8:
           const index2 = Random(0, currentData.length - 1);
           const index3 = Random(0, currentData.length - 1);
           currentData.forEach((agent) => {
-            agent.duration = agent.duration + (offset * 30);
+            agent.duration = agent.duration + offset * 30;
             array.push(agent);
           });
           array[index2].status = Random(1, 3);
@@ -168,7 +167,9 @@ function useGlobalStore(
             baseData.longest_wait_time + Ranges.longest_wait_time
           ),
           live_contacts: Random(
-            baseData.live_contacts - Ranges.live_contacts,
+            baseData.live_contacts - Ranges.live_contacts <= 0
+              ? 1
+              : baseData.live_contacts - Ranges.live_contacts,
             baseData.live_contacts + Ranges.live_contacts
           ),
           service_level_chart: baseData.service_level_chart,
@@ -193,7 +194,10 @@ function useGlobalStore(
           defaultBaseData.longest_wait_time
         );
         defaultBaseData.longest_wait_time = data.longest_wait_time;
-        if (data.current_time > new Date('1990-01-01') && dayjs(data.current_time).isSameOrAfter(dayjs(data.end_date))) {
+        if (
+          data.current_time > new Date("1990-01-01") &&
+          dayjs(data.current_time).isSameOrAfter(dayjs(data.end_date))
+        ) {
           setRunState("finished");
         }
         setKeyFrames(data);

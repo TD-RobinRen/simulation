@@ -63,7 +63,7 @@ export default function Dashboard() {
       <Layout>
         <Header style={{ padding: 0 }}>
           <div className="dash-header">
-            <span>Simulation</span>
+            <span>Inbound Handling Simulation</span>
             <Space>
               <Button
                 icon={isEnable ? <PlayCircleOutlined /> : <LoadingOutlined />}
