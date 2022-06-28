@@ -9,12 +9,12 @@ import { GlobalStore } from '../../../hooks/use-store'
 
 
 const firstStepData = {
-  service_level: Random(78, 94),
-  wait_time: Random(120, 240),
+  service_level: 89,
+  wait_time: 180,
   longest_wait_time: 263,
-  live_contacts: Random(5, 9),
-  live_contacts_queue: Random(1, 28),
-  abandon_rate: Random(5, 19)
+  live_contacts: 6,
+  live_contacts_queue: 14,
+  abandon_rate: 12
 }
 
 
@@ -38,6 +38,7 @@ function Random(min, max) {
 const StaffingData = () => {
   const [hasData, setHasData] = useState(false)
   const [visible, setVisible] = useState(false)
+  // const [isEdit, setIsEdit] = useState(false)
   const [resultData, setResultData] = useState(originData)
   const [initData, setInitData] = useState({
     start_date: Date.now(),
@@ -47,7 +48,7 @@ const StaffingData = () => {
     acw_time: 0
   })
 
-  const { baseData, setBaseData } = GlobalStore.useContainer()
+  const { baseData, setBaseData, runState } = GlobalStore.useContainer()
 
   const handleOk = () => {
     setVisible(false)
@@ -95,10 +96,11 @@ const StaffingData = () => {
     })
   }
 
+
   return (
     <div>
       {
-        hasData ? (<Content originData={initData} openModal={ () => setVisible(true) } onSetData={ handleResetData } />) : 
+        hasData ? (<Content disabled={runState === 'running'} originData={initData} openModal={ () => setVisible(true) } onSetData={ handleResetData } />) : 
         (<div style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setVisible(!visible)} type='primary'>Import from a Data</Button>
         </div>)

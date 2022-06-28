@@ -3,22 +3,22 @@ import TimeItem from '../TimeItem'
 import { GlobalStore } from '../../../hooks/use-store'
 
 
-function Random(min, max) {
-  return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
-}
+// function Random(min, max) {
+//   return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
+// }
 
 const secondStepData = {
-  service_level: Random(82, 98),
-  wait_time: Random(60, 170),
+  service_level: 90,
+  wait_time: 112,
   longest_wait_time: 252,
-  live_contacts: Random(5, 9),
-  live_contacts_queue: Random(0, 18),
-  abandon_rate: Random(0, 11.3),
+  live_contacts: 7,
+  live_contacts_queue: 11,
+  abandon_rate: 6,
   service_level_chart: [92, 82, 91, 91, 98, 98, 91, 98, 98, 90, 92],
   agent_occupancy: [84, 90, 92, 81, 82, 85, 85, 89, 83,83, 88,]
 }
 
-const AgentProficiency = ({ speed_to_answer = 0, talk_time = 0, acw_time = 0, isEdit = false }) => {
+const AgentProficiency = ({ speed_to_answer = 0, talk_time = 0, acw_time = 0, isEdit = false, disabled = false }) => {
 
   const { baseData, setBaseData } = GlobalStore.useContainer()
 
@@ -55,13 +55,13 @@ const AgentProficiency = ({ speed_to_answer = 0, talk_time = 0, acw_time = 0, is
   return (
     <>
       <div style={{ marginBottom: '8px' }}>
-        <TimeItem onChange={updateTimeData} isEdit={isEdit} title='Speed to answer' time={speed_to_answer}/>
+        <TimeItem disabled={disabled} onChange={updateTimeData} isEdit={isEdit} title='Speed to answer' time={speed_to_answer}/>
       </div>
       <div style={{ marginBottom: '8px' }}>
-        <TimeItem onChange={updateTimeData} isEdit={isEdit} title='Talk Time' time={talk_time}/>
+        <TimeItem disabled={disabled} onChange={updateTimeData} isEdit={isEdit} title='Talk Time' time={talk_time}/>
       </div>
       <div>
-        <TimeItem onChange={updateTimeData} isEdit={isEdit} title='ACW Time' time={acw_time}/>
+        <TimeItem disabled={disabled} onChange={updateTimeData} isEdit={isEdit} title='ACW Time' time={acw_time}/>
       </div>
     </>
   )

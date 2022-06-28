@@ -9,7 +9,7 @@ const Content = (
       speed_to_answer = 0,
       talk_time=  0,
       acw_time = 0 
-  }, openModal, onSetData }) => {
+  }, openModal, onSetData, disabled }) => {
   const handleOpenModal = useCallback(() => {
     openModal()
   }, [openModal])
@@ -35,7 +35,7 @@ const Content = (
       </div>
 
       <div style={{ marginTop: '16px' }}>
-        <AgentProficiency isEdit={true} {...agentProficiencyProps}/>
+        <AgentProficiency isEdit={true} disabled={disabled} {...agentProficiencyProps}/>
       </div>
       
     </div>

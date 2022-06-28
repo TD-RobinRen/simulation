@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Row, Col, InputNumber } from 'antd'
 
-const TimeItem = ({ title, time, isEdit = false, onChange }) => {
+const TimeItem = ({ title, time, isEdit = false, onChange, disabled = false }) => {
   const { m, s } = secondToMinutes(time)
   const [minute, setMinute] = useState(m || 0)
   const [second, setSecond] = useState(s || 0)
@@ -27,7 +27,7 @@ const TimeItem = ({ title, time, isEdit = false, onChange }) => {
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginRight: '16px' }}>
             <div>
               {
-                isEdit ? <InputNumber value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
+                isEdit ? <InputNumber disabled={disabled} value={minute} min={0} max={59} onChange={handleMinute}/> : <span>{m}</span>
               }
             </div>
             <div style={{ marginLeft: '8px' }}>
@@ -38,7 +38,7 @@ const TimeItem = ({ title, time, isEdit = false, onChange }) => {
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <div>
               {
-                isEdit ? <InputNumber value={second} min={0} max={59} onChange={ handleSecond }/> : <span>{s}</span>
+                isEdit ? <InputNumber disabled={disabled} value={second} min={0} max={59} onChange={ handleSecond }/> : <span>{s}</span>
               }
             </div>
             <div style={{ marginLeft: '8px' }}>

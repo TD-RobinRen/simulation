@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import CallNumberTable from './callNumberTable'
 import TimeItem from '../TimeItem'
 
-const Content = ({ sourceData, tableData, maximum_time, openModal, onReset }) => {
+const Content = ({ sourceData, tableData, maximum_time, openModal, onReset, disabled = false }) => {
 
   const handleOpenModal = useCallback(() => {
     openModal()
@@ -25,7 +25,7 @@ const Content = ({ sourceData, tableData, maximum_time, openModal, onReset }) =>
         <CallNumberTable sourceData={sourceData} tableData={tableData}/>
 
         <div style={{ marginTop: '16px' }}>
-          <TimeItem isEdit title='Maximum Waiting Time' time={maximum_time}/>
+          <TimeItem isEdit disabled={disabled} title='Maximum Waiting Time' time={maximum_time}/>
         </div>
       </div>
 

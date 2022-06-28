@@ -4,6 +4,7 @@ import Content from './Content'
 import CallNumberTable from './callNumberTable'
 import TIME_PERIOD from './mockData'
 import TimeItem from '../TimeItem'
+import { GlobalStore } from '../../../hooks/use-store'
 
 function Random(min, max) {
   return Math.max((Math.round(Math.random() * (max - min)) + min), 0);
@@ -25,6 +26,8 @@ const CallVolume = () => {
   const [visible, setVisible] = useState(false)
   const [originData, setOriginData] = useState({ tableData: generateRandomListNum(), maximum_time: Random(240, 600) })
   const [initData, setInitData] = useState({ tableData: [], maximum_time: 0 })
+
+  const { runState } = GlobalStore.useContainer()
 
   const handleOk = () => {
     setVisible(false)
@@ -51,7 +54,7 @@ const CallVolume = () => {
   return (
     <div>
       {
-        hasData ? (<Content sourceData={TIME_PERIOD} {...initData} openModal={ () => { setVisible(true) } } onReset={handleReset}/>) : 
+        hasData ? (<Content disabled={ runState === 'running' } sourceData={TIME_PERIOD} {...initData} openModal={ () => { setVisible(true) } } onReset={handleReset}/>) : 
         (<div style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setVisible(!visible)} type='primary'>Import from a Data</Button>
         </div>)
@@ -66,7 +69,7 @@ const CallVolume = () => {
               <h3>Call Volume</h3>
               <CallNumberTable sourceData={TIME_PERIOD} tableData={ originData.tableData } />
               <div style={{ marginTop: '16px' }}>
-                <TimeItem title='Maximum Waiting Time' time={originData.maximum_time}/>
+                <TimeItem  title='Maximum Waiting Time' time={originData.maximum_time}/>
               </div>
             </div>
           </Col>
