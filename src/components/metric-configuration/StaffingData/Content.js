@@ -1,45 +1,65 @@
-import React, {useCallback, useMemo} from 'react'
-import { Button } from 'antd'
-import Staffing from './Staffing'
-import AgentProficiency from './agentProficiency'
+import React, { useCallback, useMemo } from "react";
+import { Button } from "antd";
+import Staffing from "./Staffing";
+import AgentProficiency from "./agentProficiency";
 
-const Content = (
-  { originData: { 
-      tableData = [],
-      speed_to_answer = 0,
-      talk_time=  0,
-      acw_time = 0 
-  }, openModal, onSetData, disabled }) => {
+const Content = ({
+  originData: {
+    tableData = [],
+    speed_to_answer = 0,
+    talk_time = 0,
+    acw_time = 0,
+  },
+  openModal,
+  onSetData,
+  disabled,
+}) => {
   const handleOpenModal = useCallback(() => {
-    openModal()
-  }, [openModal])
+    openModal();
+  }, [openModal]);
 
   const handleReset = useCallback(() => {
-    onSetData()
-  }, [onSetData])
+    onSetData();
+  }, [onSetData]);
 
   const agentProficiencyProps = useMemo(() => {
-    return {speed_to_answer, talk_time, acw_time}
-  }, [speed_to_answer, talk_time, acw_time])
+    return { speed_to_answer, talk_time, acw_time };
+  }, [speed_to_answer, talk_time, acw_time]);
 
   return (
-    <div style={{ padding: '8px' }}>
-
+    <div style={{ padding: "8px" }}>
       <div>
-        <Button type='primary' onClick={handleOpenModal}>Reload from a date</Button>
-        <Button type='primary' onClick={handleReset} style={{ marginLeft: '8px' }}>Reset data</Button>
-      </div>
-      
-      <div style={{ maxHeight: '300px', overflowY: 'scroll', padding: '8px 0' }}>
-        <Staffing sourceData={ tableData } />
+        <Button type="primary" onClick={handleOpenModal}>
+          Reload from a date
+        </Button>
+        <Button
+          type="primary"
+          onClick={handleReset}
+          style={{ marginLeft: "8px" }}
+        >
+          Reset data
+        </Button>
       </div>
 
-      <div style={{ marginTop: '16px' }}>
-        <AgentProficiency isEdit={true} disabled={disabled} {...agentProficiencyProps}/>
+      <div
+        style={{ maxHeight: "300px", overflowY: "scroll", padding: "8px 0" }}
+      >
+        <Staffing sourceData={tableData} />
       </div>
-      
+
+      <div style={{ marginTop: "16px" }}>
+        <AgentProficiency
+          isEdit={true}
+          disabled={disabled}
+          {...agentProficiencyProps}
+        />
+      </div>
+
+      <div style={{ width: "100%", textAlign: "end" }}>
+        <Button type="link">Advanced Settings</Button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Content
+export default Content;
